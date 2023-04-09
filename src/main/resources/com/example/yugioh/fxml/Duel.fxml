@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="714.0" prefWidth="1493.0"
+            xmlns="http://javafx.com/javafx/19" fx:controller="com.example.yugioh.controllers.DuelController">
+    <children>
+        <BorderPane prefHeight="707.0" prefWidth="1458.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0"
+                    AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
+            <center>
+
+                <HBox fillHeight="false" minWidth="-Infinity" prefHeight="712.0" prefWidth="722.0"
+                      BorderPane.alignment="CENTER">
+                    <VBox fx:id="buttons" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="261.0" prefWidth="106.0" spacing="2.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+                        <children>
+                            <Button fx:id="draw" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#handleDrawPhase" prefHeight="54.0" prefWidth="122.0" text="DRAW" />
+                            <Button fx:id="sp" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#handleSpPhase" prefHeight="54.0" prefWidth="122.0" text="SP" />
+                            <Button fx:id="main1" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#handleMain1Phase" prefHeight="54.0" prefWidth="136.0" text="MAIN1" />
+                            <Button fx:id="battle" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#handleBattlePhase" prefHeight="52.0" prefWidth="129.0" text="BATTLE" textAlignment="CENTER" />
+                            <Button fx:id="main2" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#handleMain2Phase" prefHeight="52.0" prefWidth="127.0" text="MAIN2" />
+                            <Button fx:id="end" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#handleEndPhase" prefHeight="49.0" prefWidth="118.0" text="END" />
+                            <BorderPane prefHeight="1.0" prefWidth="106.0" />
+                        </children>
+                    </VBox>
+                    <fx:include source="Field.fxml" fx:id="field"/>
+                </HBox>
+            </center>
+            <left>
+                <HBox prefHeight="712.0" prefWidth="452.0" BorderPane.alignment="CENTER">
+                    <fx:include source="CardInfos.fxml"/>
+                </HBox>
+            </left>
+        </BorderPane>
+    </children>
+</AnchorPane>

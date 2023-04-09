@@ -1,0 +1,21 @@
+StackPane
+{
+    -fx-border-radius: 5px;
+    -fx-border-color: "white";
+    -fx-border-width: 3px;
+}
+
+ GridPane
+ {
+    -fx-border-radius: 5px;
+    -fx-border-color: "white";
+    -fx-border-width: 3px;
+ }
+
+ Rectangle
+ {
+    -fx-fill: #401D1F;
+    -fx-opacity: 0.7;
+ }
+
+

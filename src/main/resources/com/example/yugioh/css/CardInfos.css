@@ -1,0 +1,6 @@
+Label, TextArea, ImageView, TextFlow
+{
+    -fx-border-radius: 5px;
+    -fx-border-color: "black";
+    -fx-border-width: 2px;
+}

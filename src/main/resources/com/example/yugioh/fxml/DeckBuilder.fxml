@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.yugioh.controllers.DeckBuilderController">
+    <children>
+        <BorderPane layoutX="2.0" layoutY="1.0" prefHeight="800.0" prefWidth="800.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0">
+            <top>
+                <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="800.0">
+                    <children>
+                        <Button mnemonicParsing="false" text="Button" />
+                        <Button mnemonicParsing="false" text="Button" />
+                        <Button mnemonicParsing="false" text="Button" />
+                        <Button mnemonicParsing="false" onAction="#saveGame" text="Save" />
+                    </children>
+                </HBox>
+            </top>
+            <center>
+                <VBox fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <fx:include fx:id="mainDeck" source="Deck.fxml" />
+                        <fx:include fx:id="extraDeck" source="Deck.fxml" />
+                        <fx:include fx:id="sideDeck" source="Deck.fxml" />
+                    </children>
+                </VBox>
+            </center>
+            <left>
+                <fx:include fx:id="cardInfos" minWidth="-Infinity" source="CardInfos.fxml" />
+            </left>
+            <right>
+                <VBox prefHeight="800.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <HBox prefHeight="20.0" prefWidth="400.0">
+                            <children>
+                                <TextArea fx:id="CardToSearch" prefHeight="47.0" prefWidth="395.0" promptText="enter card name">
+                                    <font>
+                                        <Font size="10.0" />
+                                    </font>
+                                </TextArea>
+                                <Button mnemonicParsing="false" onAction="#searchCard" prefHeight="43.0" prefWidth="63.0" text="find card" />
+                            </children>
+                        </HBox>
+                        <ScrollPane fitToHeight="true" fitToWidth="true" maxWidth="-Infinity" prefHeight="774.0" prefWidth="400.0">
+                            <content>
+                                <GridPane fx:id="cardResultGrid" minHeight="-1.0" minWidth="-Infinity" prefHeight="744.0" prefWidth="298.0">
+                                    <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                                    </rowConstraints>
+                                </GridPane>
+                            </content>
+                            <VBox.margin>
+                                <Insets top="20.0" />
+                            </VBox.margin>
+                        </ScrollPane>
+                    </children>
+                </VBox>
+            </right>
+        </BorderPane>
+    </children>
+
+</AnchorPane>
