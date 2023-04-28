@@ -25,7 +25,10 @@
                             <BorderPane prefHeight="1.0" prefWidth="106.0" />
                         </children>
                     </VBox>
-                    <fx:include source="Field.fxml" fx:id="field"/>
+                    <VBox>
+                        <fx:include source="Field.fxml" fx:id="fieldOpponent"/>
+                        <fx:include source="Field.fxml" fx:id="fieldDuelist"/>
+                    </VBox>
                 </HBox>
             </center>
             <left>

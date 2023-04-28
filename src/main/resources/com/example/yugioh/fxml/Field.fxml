@@ -6,100 +6,105 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 
-<AnchorPane prefHeight="418.0" prefWidth="800.0" styleClass="background" stylesheets="@../css/Field.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.yugioh.controllers.FieldController">
-    <children>
-        <ImageView fitHeight="428.0" fitWidth="800.0" opacity="0.85" pickOnBounds="true" smooth="false" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
-            <image>
-                <Image url="@../images/KuribohPlaymat.jpg" />
-            </image>
-            <effect>
-                <Blend />
-            </effect>
-        </ImageView>
-        <VBox alignment="BOTTOM_CENTER" layoutX="3.0" layoutY="3.0" prefHeight="424.0" prefWidth="800.0" spacing="1.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
-            <children>
-                <HBox alignment="CENTER" fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="791.0" spacing="5.0">
-                    <children>
-                        <VBox alignment="BOTTOM_CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="317.0" prefWidth="100.0">
-                            <children>
-                                <StackPane fx:id="fieldZone" prefHeight="105.0" prefWidth="169.0" />
-                                <StackPane fx:id="extraDeckZone" prefHeight="105.0" prefWidth="167.0" />
-                            </children>
-                        </VBox>
-                        <VBox prefHeight="317.0" prefWidth="750.0">
-                            <children>
-                                <HBox prefHeight="160.0" prefWidth="750.0">
-                                    <children>
-                                        <GridPane fx:id="monsterZone" gridLinesVisible="true" prefHeight="273.0" prefWidth="506.0">
-                                            <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                            </columnConstraints>
-                                            <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                            </rowConstraints>
-                                            <children>
-                                            </children>
-                                        </GridPane>
-                                    </children>
-                                </HBox>
-                                <HBox prefHeight="160.0" prefWidth="750.0">
-                                    <children>
-                                        <GridPane fx:id="spellMonsterZone" gridLinesVisible="true">
-                                            <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                            </columnConstraints>
-                                            <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                            </rowConstraints>
-                                            <children>
-                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="132.0" stroke="BLACK" strokeType="INSIDE" width="87.0" />
-                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="132.0" stroke="BLACK" strokeType="INSIDE" width="87.0" GridPane.columnIndex="1" />
-                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="132.0" stroke="BLACK" strokeType="INSIDE" styleClass="Rectangle" width="87.0" GridPane.columnIndex="2" />
-                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="132.0" stroke="BLACK" strokeType="INSIDE" styleClass="Rectangle" width="87.0" GridPane.columnIndex="3" />
-                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#971511" height="132.0" stroke="BLACK" strokeType="INSIDE" styleClass="Rectangle" width="87.0" GridPane.columnIndex="4" />
-                                            </children>
-                                        </GridPane>
-                                    </children>
-                                </HBox>
-                            </children>
-                        </VBox>
-                        <VBox alignment="BOTTOM_CENTER" prefHeight="320.0" prefWidth="250.0" spacing="2.0">
-                            <children>
-                                <StackPane fx:id="banishZone" prefHeight="105.0" prefWidth="201.0" />
-                                <StackPane fx:id="graveyardZone" prefHeight="105.0" prefWidth="67.0" />
-                                <StackPane fx:id="mainDeckZone" prefHeight="105.0" prefWidth="173.0" />
-                            </children>
-                        </VBox>
-                    </children>
+<AnchorPane fx:id="fieldInterface" prefHeight="418.0" prefWidth="800.0" styleClass="background" stylesheets="@../css/Field.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.yugioh.controllers.FieldController">
+    <ImageView fitHeight="428.0" fitWidth="800.0" opacity="0.85" pickOnBounds="true" smooth="false" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
+        <Image url="@../images/KuribohPlaymat.jpg" />
+        <effect>
+            <Blend />
+        </effect>
+    </ImageView>
+    <VBox alignment="BOTTOM_CENTER" layoutX="3.0" layoutY="3.0" prefHeight="424.0" prefWidth="800.0" spacing="1.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
+        <HBox alignment="CENTER" fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="791.0" spacing="5.0">
+            <VBox alignment="BOTTOM_CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="317.0" prefWidth="100.0">
+                <StackPane fx:id="fieldZone" prefHeight="105.0" prefWidth="169.0" />
+                <StackPane fx:id="extraDeckZone" prefHeight="105.0" prefWidth="167.0" />
+            </VBox>
+            <VBox prefHeight="317.0" prefWidth="750.0">
+                <HBox fx:id="monsterZone" prefHeight="160.0" prefWidth="750.0">
+               <StackPane prefHeight="150.0" prefWidth="200.0">
+                  <children>
+                     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="150.0" stroke="BLACK" strokeType="INSIDE" width="94.0" />
+                  </children>
+               </StackPane>
+               <StackPane prefHeight="150.0" prefWidth="200.0">
+                  <children>
+                     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="164.0" stroke="BLACK" strokeType="INSIDE" width="94.0" />
+                  </children>
+               </StackPane>
+               <StackPane prefHeight="150.0" prefWidth="200.0">
+                  <children>
+                     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="157.0" stroke="BLACK" strokeType="INSIDE" width="93.0" />
+                  </children>
+               </StackPane>
+               <StackPane prefHeight="150.0" prefWidth="200.0">
+                  <children>
+                     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="156.0" stroke="BLACK" strokeType="INSIDE" width="92.0" />
+                  </children>
+               </StackPane>
+               <StackPane prefHeight="150.0" prefWidth="200.0">
+                  <children>
+                     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="155.0" stroke="BLACK" strokeType="INSIDE" width="91.0" />
+                  </children>
+               </StackPane>
                 </HBox>
-                <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="792.0" spacing="1.0">
-                    <children>
-                        <GridPane fx:id="handZone" prefHeight="98.0" prefWidth="796.0">
-                            <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            </columnConstraints>
-                            <rowConstraints>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            </rowConstraints>
-                        </GridPane>
-                    </children>
+                <HBox prefHeight="160.0" prefWidth="750.0">
+                    <GridPane fx:id="spellMonsterZone" gridLinesVisible="true">
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        </columnConstraints>
+                        <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        </rowConstraints>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="144.0" stroke="BLACK" strokeType="INSIDE" width="93.0" />
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="147.0" stroke="BLACK" strokeType="INSIDE" width="90.0" />
+                     </children></StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="145.0" stroke="BLACK" strokeType="INSIDE" width="89.0" />
+                     </children></StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="148.0" stroke="BLACK" strokeType="INSIDE" width="95.0" />
+                     </children></StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="4">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="155.0" stroke="BLACK" strokeType="INSIDE" width="87.0" />
+                     </children></StackPane>
+                    </GridPane>
                 </HBox>
-            </children>
-        </VBox>
-    </children>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="320.0" prefWidth="250.0" spacing="2.0">
+                <StackPane fx:id="banishZone" prefHeight="105.0" prefWidth="201.0" />
+                <StackPane fx:id="graveyardZone" prefHeight="105.0" prefWidth="67.0" />
+                <StackPane fx:id="mainDeckZone" prefHeight="105.0" prefWidth="173.0" />
+            </VBox>
+        </HBox>
+        <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="792.0" spacing="1.0">
+            <GridPane fx:id="handZone" prefHeight="98.0" prefWidth="796.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+            </GridPane>
+        </HBox>
+    </VBox>
     <padding>
         <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
     </padding>

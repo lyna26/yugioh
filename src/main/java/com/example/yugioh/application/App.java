@@ -1,14 +1,13 @@
 package com.example.yugioh.application;
 
-
 import com.example.yugioh.models.player.Player;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -18,8 +17,7 @@ public class App extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws IOException, ClassNotFoundException, SQLException {
-
+    public void start(Stage primaryStage) throws IOException, ClassNotFoundException{
         Player p = new Player("Lili");
         Game game = Game.getInstance();
         game.setPlayer(p);

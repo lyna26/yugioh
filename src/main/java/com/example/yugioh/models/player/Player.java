@@ -31,7 +31,6 @@ public class Player implements Serializable {
     public Player(String name){
         this.name = name;
         this.decks = new ArrayList<>();
-        field = new Field();
         isMonsterNormalSummoned = false;
     }
 
@@ -69,7 +68,6 @@ public class Player implements Serializable {
         //TODO see who handles monster position and maybe add getter/setter to monster card  monsterCard.setFace(face);
         field.getHandZone().removeCard(monsterCard);
         field.getMonsterZone().addCard(monsterCard);
-
     }
 
     /**

@@ -78,7 +78,7 @@ public class Duel {
      */
     public void fillPlayerHands() {
         for (int i = 0; i < 5; i++) {
-            System.out.println("fill firt player hand");
+            System.out.println("fill first player hand");
             firstPlayer.draw();
             System.out.println("fill second player hand");
             secondPlayer.draw();
@@ -148,7 +148,8 @@ public class Duel {
      */
     //TODO
     public boolean isPlayerMainDeckEmpty(){
-        return firstPlayer.getField().getMainDeckZone().getCards().isEmpty() ||  secondPlayer.getField().getMainDeckZone().getCards().isEmpty();
+        return firstPlayer.getField().getMainDeckZone().getCards().isEmpty() ||
+                secondPlayer.getField().getMainDeckZone().getCards().isEmpty();
     }
 
     /**
@@ -166,6 +167,15 @@ public class Duel {
             return firstPlayer;
         } else {
             return secondPlayer;
+        }
+    }
+
+    public Player getOpponentPlayer()
+    {
+        if (turns.size() % 2 == 0) {
+            return secondPlayer;
+        } else {
+            return firstPlayer;
         }
     }
 }

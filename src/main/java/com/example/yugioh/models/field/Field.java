@@ -1,6 +1,5 @@
 package com.example.yugioh.models.field;
 
-import com.example.yugioh.models.player.Player;
 import lombok.ToString;
 import lombok.Value;
 

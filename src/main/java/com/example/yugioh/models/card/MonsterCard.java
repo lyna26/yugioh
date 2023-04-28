@@ -1,5 +1,7 @@
 package com.example.yugioh.models.card;
 
+import com.example.yugioh.enums.Position;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -19,10 +21,10 @@ public abstract class MonsterCard extends Card {
     private int def;
     private int level;
     private String attribute;
+    private Position position = Position.ATK;
 
     /**
      * Constructs a new MonsterCard object with the given data from a database ResultSet.
-     *
      * @param card a ResultSet object containing the card data
      */
     public MonsterCard(ResultSet card) throws SQLException {
