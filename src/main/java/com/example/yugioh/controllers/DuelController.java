@@ -29,6 +29,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class DuelController implements Initializable {
+    public AnchorPane lpProgressDuelist;
+    public LpProgressController lpProgressDuelistController;
+    public AnchorPane lpProgressOpponent;
+    public LpProgressController lpProgressOpponentController;
+
     private Duel duel;
     private Turn turn;
     @FXML
@@ -65,6 +70,12 @@ public class DuelController implements Initializable {
         duel.getFirstPlayer().setField(fieldDuelistController.getField());
         duel.getSecondPlayer().setField(fieldOpponentController.getField());
 
+        duel.getFirstPlayer().setLp(lpProgressDuelistController.getLpProgress());
+        duel.getSecondPlayer().setLp(lpProgressOpponentController.getLpProgress());
+
+
+        duel.getFirstPlayer().setField(fieldDuelistController.getField());
+        duel.getSecondPlayer().setField(fieldOpponentController.getField());
         duel.play();
 
         duel.getCurrentPlayer().summonMonster((MonsterCard) duel.getCurrentPlayer().getField().getHandZone().getCards().get(0));
@@ -227,12 +238,11 @@ public class DuelController implements Initializable {
 
     public void inflictDamage(int damage){
         System.out.println("Inflict damage...");
-        if (damage < 0)
-        {
-            duel.getCurrentPlayer().setLp( duel.getCurrentPlayer().getLp() + damage);
+        if (damage < 0) {
+            duel.getCurrentPlayer().getLp().getCurrentLp().set(duel.getCurrentPlayer().getLp().getCurrentLp().getValue() + damage);
         }
         if(damage > 0){
-            duel.getOpponentPlayer().setLp(duel.getOpponentPlayer().getLp() - damage);
+            duel.getOpponentPlayer().getLp().getCurrentLp().set(duel.getOpponentPlayer().getLp().getCurrentLp().getValue() - damage);
         }
     }
 }

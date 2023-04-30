@@ -25,7 +25,8 @@ public class Player implements Serializable {
     private String name;
     private DeckSet duelDeck;
     private transient Field field;
-    private transient int lp;
+
+    private transient LpProgressBar lp;
     private transient boolean isMonsterNormalSummoned;
 
     public Player(String name){

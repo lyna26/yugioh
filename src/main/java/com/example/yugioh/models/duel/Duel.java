@@ -49,7 +49,6 @@ public class Duel {
      * Prepares the players for the game by setting their lp and shuffling their decks and filling their hands.
      */
     public void preparePlayers() {
-        setPlayerLP();
         shufflePlayersDeck();
         playersPutDecks();
         fillPlayerHands();
@@ -88,10 +87,10 @@ public class Duel {
     /**
      * set player lp
      */
-    public void setPlayerLP() {
+    /*public void setPlayerLP() {
         firstPlayer.setLp(MAX_LP);
         secondPlayer.setLp(MAX_LP);
-    }
+    }*/
 
     /**
      * actions to do at the end of the game
@@ -108,9 +107,9 @@ public class Duel {
     public DuelResult getResult()
     {
         if (isPlayerLpDownToZero()) {
-            if (firstPlayer.getLp() == secondPlayer.getLp()) {
+            if (firstPlayer.getLp().getCurrentLp() == secondPlayer.getLp().getCurrentLp()) {
                 return DuelResult.DRAW;
-            } else if (firstPlayer.getLp() > secondPlayer.getLp()) {
+            } else if (firstPlayer.getLp().getCurrentLp().getValue() > secondPlayer.getLp().getCurrentLp().getValue()) {
                 return DuelResult.PLAYER1_WIN;
             } else {
                 return DuelResult.PLAYER2_WIN;
@@ -130,7 +129,7 @@ public class Duel {
      * @return boolean
      */
     public boolean isPlayerLpDownToZero(){
-        return firstPlayer.getLp() <= 0 || secondPlayer.getLp() <= 0;
+        return firstPlayer.getLp().getCurrentLp().getValue()<= 0 || secondPlayer.getLp().getCurrentLp().getValue() <= 0;
     }
 
     /**
