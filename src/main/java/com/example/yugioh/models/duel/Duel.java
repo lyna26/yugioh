@@ -10,13 +10,13 @@ import java.util.List;
 
 @Value
 @ToString
-
 public class Duel {
     Player firstPlayer;
     Player secondPlayer;
     List<Turn> turns;
 
     int MAX_LP = 8000;
+
     /**
      * Constructs a new Duel object with two players and initializes the list of turns to an empty list.
      * @param firstPlayer  the first player

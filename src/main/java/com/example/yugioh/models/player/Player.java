@@ -1,5 +1,6 @@
 package com.example.yugioh.models.player;
 
+import com.example.yugioh.enums.Face;
 import com.example.yugioh.models.card.Card;
 import com.example.yugioh.models.card.MonsterCard;
 import com.example.yugioh.models.deck.DeckSet;
@@ -9,6 +10,7 @@ import javafx.scene.image.Image;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -18,16 +20,17 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
+@Slf4j
 public class Player implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
     private final List<DeckSet> decks;
     private String name;
-    private DeckSet duelDeck;
+    private DeckSet duelDeck;//maybe use only int (index) instead.
     private transient Field field;
-
     private transient LpProgressBar lp;
     private transient boolean isMonsterNormalSummoned;
+    private String sleeve = "C://Users//Lola//IdeaProjects//demo//src//main//resources//com//example//yugioh//images//Yugioh_Card_Back.jpg";
 
     public Player(String name){
         this.name = name;
@@ -40,12 +43,12 @@ public class Player implements Serializable {
      */
     public void draw(){
             Card card = field.getMainDeckZone().getCards().get(0);
-            System.out.println("drawing" + card.getName());
+            log.info("The player {} draw {}", this.name, card.getName());
             card.setImage(new Image(card.getCardImage()));
             card.setFitWidth(150);
             card.setFitHeight(150);
             field.getMainDeckZone().removeCard(card);
-            field.getHandZone().addCard(card);
+            field.getHandZone().addCard(field.getHandZone().getCards().size(), card);
     }
 
     /**
@@ -54,7 +57,7 @@ public class Player implements Serializable {
     */
     public void discard(Card card){
         field.getHandZone().removeCard(card);
-        field.getGraveyardZone().addCard(card);
+        //field.getGraveyardZone().addCard(card);
     }
 
     public void shuffleDeck(){
@@ -62,44 +65,33 @@ public class Player implements Serializable {
     }
 
     /**
-     * Monster is moved from the hand to the field in
+     * Summon a monster.
+     * @param monsterCard monster to summon
      */
-    public void summonMonster(MonsterCard monsterCard){
-        //TODO see who handles monster position and maybe add getter/setter to monster card monsterCard.setPosition(position);
-        //TODO see who handles monster position and maybe add getter/setter to monster card  monsterCard.setFace(face);
+    public void summonMonster(int index, MonsterCard monsterCard){
         field.getHandZone().removeCard(monsterCard);
-        field.getMonsterZone().addCard(monsterCard);
+        field.getMonsterZone().addCard(index, monsterCard);
     }
 
-    /**
-     * Performs a normal summon.
-     */
-    public void normalSummon(MonsterCard monsterCard){
-        if(monsterCard.getLevel() <= 4) {
-            summonMonster(monsterCard);
-        }
-        else{
-            tributeSummon(monsterCard);
-        }
 
-        isMonsterNormalSummoned = true;
+    public void putCardOnTheSpellTrapZone(int index, Card card) {
+        field.getHandZone().removeCard(card);
+        field.getSpellTrapZone().addCard(index, card);
     }
 
-    /**
-     * Monsters with level 4 or higher need to be tribute summoned.
-     */
-    public void tributeSummon(MonsterCard monster){
-        //TODO get list of monster to discard
-        summonMonster(monster);
+    public void putCardOnMonsterZone(int index, MonsterCard card) {
+        field.getHandZone().removeCard(card);
+        field.getMonsterZone().addCard(index, card);
     }
 
     /**
      * Switches monster from ATTACK to DEFENSE or from DEFENSE to ATTACK.
      */
-    public void switchMonsterMode(MonsterCard monsterCard){}
+    public void switchMonsterMode(MonsterCard monsterCard){
+    }
 
     public void putMainDeck(){
-        field.getMainDeckZone().setCards( FXCollections.observableList(duelDeck.getMainDeck().getCardList()));
+        field.getMainDeckZone().setCards(FXCollections.observableList(duelDeck.getMainDeck().getCardList()));
     }
     public void putExtraDeck(){
         field.getExtraDeckZone().setCards(FXCollections.observableList(duelDeck.getExtraDeck().getCardList()));

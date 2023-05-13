@@ -20,7 +20,7 @@ public abstract class Zone implements IZone {
         cards = FXCollections.observableArrayList();
     }
 
-    public void addCard(Card card) {
+    public void addCard(int index, Card card) {
         cards.add(card);
     }
 

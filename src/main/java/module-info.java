@@ -8,6 +8,7 @@ module yugioh {
     requires javafx.web;
     requires org.controlsfx.controls;
     requires annotations;
+    requires org.slf4j;
     opens com.example.yugioh to javafx.fxml;
 
     exports com.example.yugioh.application;

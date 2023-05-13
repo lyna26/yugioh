@@ -12,9 +12,7 @@ public class HandZone extends Zone {
     }
 
     @Override
-    public void addCard(Card card) {
-        if (getCards().size() < limitNbCard) {
-            super.addCard(card);
-        }
+    public void addCard(int index, Card card) {
+            super.addCard(index, card);
     }
 }

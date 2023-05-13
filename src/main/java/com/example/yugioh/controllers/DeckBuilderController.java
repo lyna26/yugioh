@@ -19,7 +19,6 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;

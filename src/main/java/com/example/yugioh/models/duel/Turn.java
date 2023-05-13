@@ -1,6 +1,6 @@
 package com.example.yugioh.models.duel;
 
-
+import com.example.yugioh.models.phase.BattlePhase;
 import com.example.yugioh.models.phase.DrawPhase;
 import com.example.yugioh.models.phase.Phase;
 import com.example.yugioh.models.player.Player;
@@ -18,6 +18,8 @@ import lombok.ToString;
 public class Turn {
     private Phase currentPhase;
     private final Player currentPlayer;
+    private final BattlePhase battlePhase = new BattlePhase();
+    private final DrawPhase drawPhase = new DrawPhase();
 
     public Turn(Player currentPlayer) {
         this.currentPlayer = currentPlayer;

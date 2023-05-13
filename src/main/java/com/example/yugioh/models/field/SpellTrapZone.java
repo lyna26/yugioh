@@ -12,10 +12,10 @@ public class SpellTrapZone extends Zone{
     }
 
     @Override
-    public void addCard(Card card) {
+    public void addCard(int index, Card card) {
         if (getCards().size() < limitNbCard &&
                 (card.getTypes().contains(CardType.SPELL.getCardType()) || card.getTypes().contains(CardType.TRAP.getCardType()))) {
-            super.addCard(card);
+            super.addCard(index, card);
         }
     }
 }

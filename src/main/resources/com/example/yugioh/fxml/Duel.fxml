@@ -16,6 +16,7 @@
             <HBox fillHeight="false" minWidth="-Infinity" prefHeight="864.0" prefWidth="1131.0" BorderPane.alignment="CENTER">
                 <VBox fx:id="buttons" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="862.0" prefWidth="131.0" spacing="5.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
                     <fx:include fx:id="lpProgressDuelist" source="ProgressLp.fxml" />
+                    <fx:include fx:id="countDownDuelist" source="CountDownView.fxml" />
                     <Button fx:id="draw" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#handleDrawPhase" prefHeight="54.0" prefWidth="122.0" text="DRAW" />
                     <Button fx:id="sp" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#handleSpPhase" prefHeight="54.0" prefWidth="122.0" text="SP" />
                     <Button fx:id="main1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#handleMain1Phase" prefHeight="54.0" prefWidth="105.0" text="MAIN1" />
@@ -33,6 +34,7 @@
                 </VBox>
                 <VBox prefHeight="861.0" prefWidth="125.0" >
                     <fx:include fx:id="lpProgressOpponent" source="ProgressLp.fxml" />
+                    <fx:include fx:id="countDownOpponent" source="CountDownView.fxml" />
                 </VBox>
             </HBox>
         </center>
