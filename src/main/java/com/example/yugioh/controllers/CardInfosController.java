@@ -1,40 +1,40 @@
 package com.example.yugioh.controllers;
 
+import com.example.yugioh.models.card.Card;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 
-public class CardInfosController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class CardInfosController implements Initializable {
     @FXML
-    Label cardName;
+    Text cardName;
     @FXML
     ImageView cardImage;
     @FXML
-    TextArea cardDesc;
+    Text cardDesc;
 
-    public Label getCardName() {
-        return cardName;
+    private final ObjectProperty<Card> cardProperty = new SimpleObjectProperty<>();
+
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        cardProperty.addListener((observable, oldCard, newCard) -> {
+            if (newCard != null) {
+                cardName.setText(newCard.getName());
+                cardDesc.setText(newCard.getDescription());
+                cardImage.setImage(new Image(newCard.getBigCardImage()));
+            }
+        });
     }
 
-    public void setCardName(String cardName) {
-        this.cardName.setText(cardName);
-    }
-
-    public ImageView getCardImage() {
-        return cardImage;
-    }
-
-    public void setCardImage(String cardImage) {
-        this.cardImage.setImage(new Image(cardImage));
-    }
-
-    public TextArea getCardDesc() {
-        return cardDesc;
-    }
-
-    public void setCardDesc(String cardDesc) {
-        this.cardDesc.setText(cardDesc);
+    public void setCard(Card card) {
+        cardProperty.set(card);
     }
 }

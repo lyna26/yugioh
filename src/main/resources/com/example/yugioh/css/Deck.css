@@ -1,6 +1,22 @@
-Label, GridPane
+Label
 {
-    -fx-border-radius: 5px;
-    -fx-border-color: "black";
-    -fx-border-width: 2px;
+    -fx-text-fill: white;
+    -fx-text-alignment: left;
+    -fx-padding: 0px 0px 0px 10px;
+    -fx-line-height: 40px;
+    -fx-max-height: 40px;
+    -fx-margin: 10px 0px 7px 0px;
+}
+
+.container{
+    -fx-border-radius: 10px;
+    -fx-border-color: #777777;
+    -fx-border-width: 1px;
+    -fx-background-color: #111925;
+    -fx-margin: 10px 0px 7px 0px; /* Add the margin here */
+}
+
+.gridPane > ImageView{
+     -fx-pref-width: 50px;
+     -fx-pref-height: 50px;
 }

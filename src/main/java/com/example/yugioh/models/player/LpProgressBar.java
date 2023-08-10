@@ -1,5 +1,4 @@
 package com.example.yugioh.models.player;
-;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import lombok.Getter;

@@ -12,8 +12,7 @@ import java.sql.SQLException;
  * Extends the {@link MonsterCard} class.
  */
 @ToString(includeFieldNames = true)
-@Getter
-@Setter
+
 public class SynchroMonster extends MonsterCard {
     public SynchroMonster(ResultSet card) throws SQLException {
         super(card);

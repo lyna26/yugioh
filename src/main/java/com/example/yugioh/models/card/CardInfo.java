@@ -1,27 +1,20 @@
 package com.example.yugioh.models.card;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import lombok.Value;
 
+
+@Value
 public class CardInfo {
-    private final String name;
-    private final String desc;
-    private final String race;
-    private final int atk;
-    private final int def;
-    private final int level;
-    private final int id;
-    private final String imageUrl;
+    String name;
+    String desc;
+    int id;
+    String imageUrl;
 
-    public CardInfo(ResultSet card) throws SQLException {
-        this.name = card.getString("name");
-        this.imageUrl = card.getString("image_url");
-        this.id = card.getInt("id");
-        this.desc = card.getString("desc");
-        this.level = card.getInt("level");
-        this.race = card.getString("race");
-        this.atk = card.getInt("atk");
-        this.def = card.getInt("def");
+    public CardInfo(Card  card){
+        this.name = card.getName();
+        this.imageUrl = card.getBigCardImage();
+        this.id = card.getCardId();
+        this.desc = card.getDescription();
     }
 
     public String getName() {
@@ -32,32 +25,11 @@ public class CardInfo {
         return desc;
     }
 
-    public String getRace() {
-        return race;
-    }
-
-    public int getAtk() {
-        return atk;
-    }
-
-    public int getDef() {
-        return def;
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
     public int getId() {
         return id;
     }
 
     public String getImageUrl() {
         return imageUrl;
-    }
-
-    @Override
-    public String toString() {
-        return this.name + "\n" + this.getRace() + "\n" + this.desc;
     }
 }

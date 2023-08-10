@@ -1,6 +1,31 @@
-Label, TextArea, ImageView, TextFlow
-{
-    -fx-border-radius: 5px;
-    -fx-border-color: "black";
-    -fx-border-width: 2px;
+.container {
+    -fx-border-radius: 10px;
+    -fx-border-color: #777777;
+    -fx-border-width: 1px;
+    -fx-background-color: #111925;
+}
+
+.cardDescription {
+    -fx-padding-left: 7px;
+    -fx-padding-right: 7px;
+    -fx-margin-left: 5%;
+    -fx-margin-right: 5%;
+    -fx-text-alignment: left;
+}
+
+.cardName {
+    -fx-text-alignment: center;
+    -fx-pref-width: 90%;
+    -fx-line-spacing: 30px;
+    -fx-margin: 10px 5% 10px 5%;
+}
+
+.cardImage {
+    -fx-min-width: 400px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100%;
+}
+
+Text{
+     -fx-fill: white; /* Change the text color here */
 }

@@ -22,16 +22,17 @@ import java.util.List;
 @Setter
 @ToString
 @Slf4j
-public abstract class Card extends ImageView implements Serializable {
+public abstract class Card extends ImageView implements Serializable, ICard{
     @Serial
     private static final long serialVersionUID = 1L;
     private final int cardId;
     private final String name;
     private final String description;
-    private final String cardImage;
-
+    private final String bigCardImage;
+    private final String smallCardImage;
     private String backImage = "C://Users//Lola//IdeaProjects//demo//src//main//resources//com//example//yugioh//images//Yugioh_Card_Back.jpg";
     private final List<String> types;
+    private final String monsterRace;
     private Face face = Face.UP;
 
     /**
@@ -42,7 +43,9 @@ public abstract class Card extends ImageView implements Serializable {
         this.cardId = card.getInt("id");
         this.name = card.getString("name");
         this.description = card.getString("desc");
-        this.cardImage = card.getString("image_url");
+        this.smallCardImage = card.getString("image_url_small");
+        this.bigCardImage = card.getString("image_url");
+        this.monsterRace =  card.getString("race");
         this.types = parseTypeList(card.getString("type"));
     }
 

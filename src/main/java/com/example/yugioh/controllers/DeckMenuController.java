@@ -52,8 +52,6 @@ public class DeckMenuController implements Initializable {
                     throw new RuntimeException(e);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
                 }
             }
         });

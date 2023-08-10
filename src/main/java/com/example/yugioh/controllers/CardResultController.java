@@ -1,15 +1,19 @@
 package com.example.yugioh.controllers;
 
-import com.example.yugioh.models.card.CardInfo;
+import com.example.yugioh.models.card.ICard;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 
-public class CardResultController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class CardResultController implements Initializable {
 
     @FXML
     Label cardName;
@@ -17,35 +21,35 @@ public class CardResultController {
     ImageView cardImage;
     @FXML
     TextArea cardInfosFlow;
-    private CardInfo cardInfos;
+
+    private ObjectProperty<ICard> card = new SimpleObjectProperty<>();
 
     public void setCardImage() {
-        System.out.println(cardInfos.getImageUrl());
-        cardImage.setImage(new Image(cardInfos.getImageUrl()));
-        cardImage.setPreserveRatio(true);
-        cardImage.setFitWidth(150);
-        cardImage.setFitHeight(150);
+        cardImage.setImage(new Image(card.get().getBigCardImage()));
     }
 
-    public void setCardInfosFlow() {
-        Text textName = new Text(cardInfos.getName());
-        Text textRace = new Text(cardInfos.getRace());
-        textName.setFill(Color.GREEN);
-        Text textAtkDef = new Text(cardInfos.getAtk() + "/" + cardInfos.getDef());
-        System.out.println("text" + textName.getText() + textRace.getText() + textAtkDef.getText());
-        cardInfosFlow.setText(textName.getText() + textRace.getText() + textAtkDef.getText());
+    public void setCard(ICard card) {
+        this.card.set(card);
     }
 
-    public CardInfo getCardInfo() {
-        return cardInfos;
-    }
+   public void setCardInfosFlow() {
+        ICard cardToDisplay = card.get();
+        cardInfosFlow.appendText(cardToDisplay.getName());
 
-    public void setCardInfo(CardInfo cardInfo) {
-        this.cardInfos = cardInfo;
+        if (card.get().getTypes().contains("Monster")){
+            cardInfosFlow.appendText(String.join("/",cardToDisplay.getAttribute(),cardToDisplay.getRace()));
+            cardInfosFlow.appendText(String.join("/",String.valueOf(cardToDisplay.getAtk()), String.valueOf(cardToDisplay.getDef())));
+        }
+        else {
+            cardInfosFlow.appendText(String.join("|", cardToDisplay.getTypes().get(0), cardToDisplay.getRace()));
+        }
     }
-
     public void displayInfos() {
         setCardImage();
         setCardInfosFlow();
+    }
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        card.addListener((obs, oldCard, newCard) -> displayInfos());
     }
 }

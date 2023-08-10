@@ -1,13 +1,13 @@
 package com.example.yugioh.controllers;
 
-import com.example.yugioh.factory.cardFactory.CardFactory;
 import com.example.yugioh.engines.DataBaseEngine;
 import com.example.yugioh.models.card.Card;
 import com.example.yugioh.models.deck.Deck;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
@@ -19,16 +19,20 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 
-import java.sql.ResultSet;
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.ResourceBundle;
 
-public class DeckController {
+public class DeckController implements Initializable {
     @FXML
     GridPane cardList;
 
+    @FXML
+    Label deckType;
     private Deck deck;
 
-    public void displayCard() throws SQLException {
+    public void displayCard(){
         for (Card c : deck.getCardList()) {
             addCard(c);
         }
@@ -42,61 +46,46 @@ public class DeckController {
     }
 
     public void dragEntered(DragEvent event) {
-        /* the drag-and-drop gesture entered the target */
-        /* show to the user that it is an actual gesture target */
         if (event.getGestureSource() != cardList && event.getDragboard().hasString()) {
             cardList.setBorder(new Border(new BorderStroke(Color.GREEN, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(5))));
         }
         event.consume();
     }
 
-    public void DragExited(DragEvent event) {
-        System.out.println("drag exited");
-        /* mouse moved away, remove the graphical cues */
+    public void dragExited(DragEvent event) {
         cardList.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID,
                 CornerRadii.EMPTY, new BorderWidths(5))));
         event.consume();
     }
 
-    public void DragDropped(DragEvent event) throws SQLException {
+    public void dragDropped(DragEvent event) throws SQLException {
         Dragboard db = event.getDragboard();
         boolean success = false;
         if (db.hasString()) {
             if (deck.getCardList().size() < deck.getMaxCard()) {
-                ResultSet res = DataBaseEngine.selectCardById(db.getString());
-                while (res.next()) {
-                    Card c = CardFactory.createCard(res);
-                    addCard(c);
-                    deck.addCard(c);
+                List<Card> res = DataBaseEngine.selectCardById(db.getString());
+                for (Card card: res) {
+                    addCard(card);
+                    deck.addCard(card);
                 }
                 success = true;
             }
         }
-        /* let the source know whether the string was successfully
-         * transferred and used */
         event.setDropCompleted(success);
         event.consume();
     }
 
-    public void addCard(Card card) throws SQLException {
-
-        card.setImage(new Image(card.getCardImage()));
-        ImageView v = card;
-        v.setPreserveRatio(true);
-        v.setFitWidth(100);
-        v.setFitHeight(100);
+    public void addCard(Card card){
+        card.setImage(new Image(card.getSmallCardImage()));
 
         int row = cardList.getRowCount();
         int childrenSize = cardList.getChildren().size();
         int col = cardList.getChildren().size() % 5;
-        System.out.println("children size" + childrenSize);
-        System.out.println("row" + row);
-        System.out.println("col" + col);
 
         if (childrenSize != 0 && col % 5 == 0) {
             row++;
         }
-        cardList.add(v, col, row - 1);
+        cardList.add(card, col, row - 1);
     }
 
     public Deck getDeck() {
@@ -108,15 +97,14 @@ public class DeckController {
     }
 
     public void remove(Event event) {
-        System.out.println("eventt");
         Card node = (Card) event.getTarget();
-        System.out.println("nod" + node.getName());
-
-        int colIndex = GridPane.getColumnIndex(node);
-        int rowlIndex = GridPane.getRowIndex(node);
-        System.out.println("cell clicked :" + colIndex + "" + rowlIndex);
         deck.removeCard(node);
         cardList.getChildren().remove(node);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
 
     }
 }

@@ -18,7 +18,6 @@ public class CountDown {
         return timeToGive;
     }
     public void decrementTime() {
-        System.out.println("decrementTime");
         remainingTime.set(remainingTime.get() - 1);
     }
 }

@@ -21,13 +21,19 @@ import java.util.ResourceBundle;
 @Getter
 public class FieldController implements Initializable {
     @FXML
-    public GridPane handZone;
+    private GridPane handZone;
 
     @FXML
-    public HBox monsterZone;
+    private HBox monsterZone;
 
     @FXML
-    public HBox spellTrapZone;
+    private HBox spellTrapZone;
+
+    @FXML
+    private StackPane mainDeckZone;
+
+    @FXML
+    private StackPane extraDeckZone;
 
     Field field = new Field();
 
@@ -36,6 +42,8 @@ public class FieldController implements Initializable {
         initializeHandZoneListener();
         initializeMonsterZoneListener();
         initializeSpellTrapZoneListener();
+        initializeMainDeckListener();
+        initializeExtraDeckListener();
     }
 
     private void initializeSpellTrapZoneListener() {
@@ -53,7 +61,6 @@ public class FieldController implements Initializable {
     private void removeFromSpellTrapZone(Card card) {
         StackPane pane = (StackPane) spellTrapZone.getChildren().get(0);
         pane.getChildren().remove(card);
-        System.out.println("Removed " + card.getName() + " from spellTrapZone");
     }
 
     private void addToSpellTrapZone(Card card) {
@@ -63,7 +70,6 @@ public class FieldController implements Initializable {
         int indexCard = field.getSpellTrapZone().getCards().indexOf(card);
         StackPane pane = (StackPane) monsterZone.getChildren().get(indexCard);
         pane.getChildren().add(card);
-        System.out.println("Added " + card.getName() + " to spellTrapZone");
     }
 
     private void initializeHandZoneListener() {
@@ -83,12 +89,10 @@ public class FieldController implements Initializable {
         StackPane root = new StackPane();
         root.getChildren().add(card);
         handZone.add(root, size, 0);
-        System.out.println("Added " + card.getName() + " to handZone");
     }
 
     private void removeFromHandZone(Card card) {
         handZone.getChildren().remove(card);
-        System.out.println("Removed " + card.getName() + " from handZone");
     }
 
     private void initializeMonsterZoneListener() {
@@ -110,12 +114,51 @@ public class FieldController implements Initializable {
         int indexCard = field.getMonsterZone().getCards().indexOf(card);
         StackPane pane = (StackPane) monsterZone.getChildren().get(indexCard);
         pane.getChildren().add(card);
-        System.out.println("Added " + card.getName() + " to monsterZone");
     }
 
     private void removeFromMonsterZone(Card card) {
         StackPane pane = (StackPane) monsterZone.getChildren().get(0);
         pane.getChildren().remove(card);
-        System.out.println("Removed " + card.getName() + " from monsterZone");
+    }
+    private void initializeMainDeckListener() {
+        field.getMainDeckZone().getCards().addListener((ListChangeListener<Card>) change -> {
+            while (change.next()) {
+                if (change.wasAdded()) {
+                    change.getAddedSubList().forEach(this::addToMainDeck);
+                } else if (change.wasRemoved()) {
+                    change.getRemoved().forEach(this::removeFromMainDeck);
+                }
+            }
+        });
+    }
+
+    private void addToMainDeck(Card card) {
+        card.setImage(new Image(card.getBackImage()));
+        mainDeckZone.getChildren().add(card);
+    }
+
+    private void removeFromMainDeck(Card card) {
+        mainDeckZone.getChildren().remove(card);
+    }
+
+    private void initializeExtraDeckListener() {
+        field.getExtraDeckZone().getCards().addListener((ListChangeListener<Card>) change -> {
+            while (change.next()) {
+                if (change.wasAdded()) {
+                    change.getAddedSubList().forEach(this::addToExtraDeck);
+                } else if (change.wasRemoved()) {
+                    change.getRemoved().forEach(this::removeFromExtraDeck);
+                }
+            }
+        });
+    }
+
+    private void addToExtraDeck(Card card) {
+        card.setImage(new Image(card.getBackImage()));
+        extraDeckZone.getChildren().add(card);
+    }
+
+    private void removeFromExtraDeck(Card card) {
+        extraDeckZone.getChildren().remove(card);
     }
 }

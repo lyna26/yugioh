@@ -1,6 +1,5 @@
 package com.example.yugioh.models.player;
 
-import com.example.yugioh.enums.Face;
 import com.example.yugioh.models.card.Card;
 import com.example.yugioh.models.card.MonsterCard;
 import com.example.yugioh.models.deck.DeckSet;
@@ -44,7 +43,7 @@ public class Player implements Serializable {
     public void draw(){
             Card card = field.getMainDeckZone().getCards().get(0);
             log.info("The player {} draw {}", this.name, card.getName());
-            card.setImage(new Image(card.getCardImage()));
+            card.setImage(new Image(card.getSmallCardImage()));
             card.setFitWidth(150);
             card.setFitHeight(150);
             field.getMainDeckZone().removeCard(card);
@@ -84,16 +83,16 @@ public class Player implements Serializable {
         field.getMonsterZone().addCard(index, card);
     }
 
-    /**
-     * Switches monster from ATTACK to DEFENSE or from DEFENSE to ATTACK.
-     */
-    public void switchMonsterMode(MonsterCard monsterCard){
-    }
-
     public void putMainDeck(){
-        field.getMainDeckZone().setCards(FXCollections.observableList(duelDeck.getMainDeck().getCardList()));
+        log.info("put main deck");
+        for(Card card: duelDeck.getMainDeck().getCardList()) {
+            field.getMainDeckZone().addCard(field.getMainDeckZone().getCards().size(), card);
+        }
     }
     public void putExtraDeck(){
-        field.getExtraDeckZone().setCards(FXCollections.observableList(duelDeck.getExtraDeck().getCardList()));
+        log.info("put extra deck");
+        for(Card card: duelDeck.getExtraDeck().getCardList()) {
+            field.getExtraDeckZone().addCard(field.getExtraDeckZone().getCards().size(), card);
+        }
     }
 }

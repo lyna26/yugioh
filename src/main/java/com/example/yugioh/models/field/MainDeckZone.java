@@ -14,8 +14,4 @@ public class MainDeckZone extends Zone {
     public MainDeckZone() {
         super();
     }
-
-    @Override
-    public void addCard(int index,Card card) {
-    }
 }

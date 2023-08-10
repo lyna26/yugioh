@@ -17,12 +17,12 @@ import java.util.ResourceBundle;
 @Setter
 public class LpProgressController implements Initializable {
     @FXML
-    ProgressBar lpProgressBar;
+    private ProgressBar lpProgressBar;
 
     @FXML
-    Label lpPoint;
+    private Label lpPoint;
 
-    LpProgressBar lpProgress;
+    private LpProgressBar lpProgress;
 
     public LpProgressController() {
         lpProgress = new LpProgressBar(8000);
