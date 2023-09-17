@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.effect.Blend?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 
-<AnchorPane fx:id="fieldInterface" prefHeight="418.0" prefWidth="800.0" styleClass="background" stylesheets="@../css/Field.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.yugioh.controllers.FieldController">
+<AnchorPane fx:id="fieldInterface" prefHeight="418.0" prefWidth="800.0" styleClass="background" stylesheets="@../css/Field.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.yugioh.controllers.FieldController">
     <ImageView fitHeight="428.0" fitWidth="800.0" opacity="0.85" pickOnBounds="true" smooth="false" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
         <Image url="@../images/KuribohPlaymat.jpg" />
         <effect>
@@ -24,65 +18,57 @@
         <HBox alignment="CENTER" fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="791.0" spacing="5.0">
             <VBox alignment="BOTTOM_CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="317.0" prefWidth="100.0">
                 <StackPane fx:id="fieldZone" prefHeight="105.0" prefWidth="169.0" />
-                <StackPane fx:id="extraDeckZone" prefHeight="105.0" prefWidth="167.0" />
+                <StackPane fx:id="extraDeckZone" prefHeight="105.0" prefWidth="167.0">
+                    <Label text="0"/>
+                </StackPane>
             </VBox>
             <VBox prefHeight="317.0" prefWidth="750.0">
                 <HBox fx:id="monsterZone" prefHeight="160.0" prefWidth="750.0" spacing="20.0">
-               <StackPane prefHeight="150.0" prefWidth="200.0">
-                  <children>
-                     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="164.0" stroke="BLACK" strokeType="INSIDE" width="95.0" />
-                  </children>
-               </StackPane>
-               <StackPane prefHeight="150.0" prefWidth="200.0">
-                  <children>
-                     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="164.0" stroke="BLACK" strokeType="INSIDE" width="94.0" />
-                  </children>
-               </StackPane>
-               <StackPane prefHeight="150.0" prefWidth="200.0">
-                  <children>
-                     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="157.0" stroke="BLACK" strokeType="INSIDE" width="93.0" />
-                  </children>
-               </StackPane>
-               <StackPane prefHeight="150.0" prefWidth="200.0">
-                  <children>
-                     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="156.0" stroke="BLACK" strokeType="INSIDE" width="92.0" />
-                  </children>
-               </StackPane>
-               <StackPane prefHeight="150.0" prefWidth="200.0">
-                  <children>
-                     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="155.0" stroke="BLACK" strokeType="INSIDE" width="91.0" />
-                  </children>
-               </StackPane>
+                    <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="164.0" stroke="BLACK"
+                                   strokeType="INSIDE" width="95.0"/>
+                    </StackPane>
+                    <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="164.0" stroke="BLACK"
+                                   strokeType="INSIDE" width="94.0"/>
+                    </StackPane>
+                    <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="157.0" stroke="BLACK"
+                                   strokeType="INSIDE" width="93.0"/>
+                    </StackPane>
+                    <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="156.0" stroke="BLACK"
+                                   strokeType="INSIDE" width="92.0"/>
+                    </StackPane>
+                    <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="155.0" stroke="BLACK"
+                                   strokeType="INSIDE" width="91.0"/>
+                    </StackPane>
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
                 </HBox>
                 <HBox fx:id="spellTrapZone" prefHeight="160.0" prefWidth="750.0" spacing="20.0">
-               <StackPane prefHeight="150.0" prefWidth="200.0">
-                  <children>
-                     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="148.0" stroke="BLACK" strokeType="INSIDE" width="95.0" />
-                  </children>
-               </StackPane>
-               <StackPane prefHeight="150.0" prefWidth="200.0">
-                  <children>
-                           <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="144.0" stroke="BLACK" strokeType="INSIDE" width="93.0" />
-                  </children>
-               </StackPane>
-               <StackPane prefHeight="150.0" prefWidth="200.0">
-                  <children>
-                     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="147.0" stroke="BLACK" strokeType="INSIDE" width="90.0" />
-                  </children>
-               </StackPane>
-               <StackPane prefHeight="150.0" prefWidth="200.0">
-                  <children>
-                     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="145.0" stroke="BLACK" strokeType="INSIDE" width="89.0" />
-                  </children>
-               </StackPane>
-               <StackPane prefHeight="150.0" prefWidth="200.0">
-                  <children>
-                     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="148.0" stroke="BLACK" strokeType="INSIDE" width="95.0" />
-                  </children>
-               </StackPane>
+                    <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="148.0" stroke="BLACK"
+                                   strokeType="INSIDE" width="95.0"/>
+                    </StackPane>
+                    <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="144.0" stroke="BLACK"
+                                   strokeType="INSIDE" width="93.0"/>
+                    </StackPane>
+                    <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="147.0" stroke="BLACK"
+                                   strokeType="INSIDE" width="90.0"/>
+                    </StackPane>
+                    <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="145.0" stroke="BLACK"
+                                   strokeType="INSIDE" width="89.0"/>
+                    </StackPane>
+                    <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="148.0" stroke="BLACK"
+                                   strokeType="INSIDE" width="95.0"/>
+                    </StackPane>
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" />
                </padding>
@@ -91,7 +77,9 @@
             <VBox alignment="BOTTOM_CENTER" prefHeight="320.0" prefWidth="250.0" spacing="2.0">
                 <StackPane fx:id="banishZone" prefHeight="105.0" prefWidth="201.0" />
                 <StackPane fx:id="graveyardZone" prefHeight="105.0" prefWidth="67.0" />
-                <StackPane fx:id="mainDeckZone" prefHeight="105.0" prefWidth="173.0" />
+                <StackPane fx:id="mainDeckZone" prefHeight="105.0" prefWidth="173.0">
+                    <Label text="0"/>
+                </StackPane>
             </VBox>
         </HBox>
         <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="792.0" spacing="1.0">

@@ -11,12 +11,12 @@ import java.sql.SQLException;
 
 /**
  * A class representing a monster card in the Yu-Gi-Oh! trading card game.
- * Extends the {@link Card} class.
+ * Extends the {@link CardImpl} class.
  */
 @ToString()
 @Getter
 @Setter
-public abstract class MonsterCard extends Card {
+public abstract class MonsterCard extends CardImpl {
     private int atk;
     private int def;
     private int level;

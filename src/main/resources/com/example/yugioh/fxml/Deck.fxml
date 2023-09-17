@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -16,7 +17,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-        <GridPane fx:id="cardList" alignment="CENTER" gridLinesVisible="true" onDragDropped="#dragDropped" onDragEntered="#dragEntered" onDragExited="#dragExited" onDragOver="#dragOver" onMouseClicked="#remove" prefHeight="756.0" prefWidth="798.0" styleClass="gridPane" VBox.vgrow="NEVER">
+        <GridPane fx:id="cardList" alignment="CENTER" gridLinesVisible="true" onDragDropped="#dragDropped" onDragEntered="#dragEntered" onDragExited="#dragExited" onDragOver="#dragOver" onMouseClicked="#remove" prefHeight="756.0" prefWidth="798.0" VBox.vgrow="NEVER">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" />
             </columnConstraints>
@@ -26,6 +27,10 @@
          <VBox.margin>
             <Insets />
          </VBox.margin>
+         <styleClass>
+            <String fx:value="gridPane" />
+            <String fx:value="container" />
+         </styleClass>
         </GridPane>
       <padding>
          <Insets top="10.0" />

@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 /**
  * A class representing a trap card in the Yu-Gi-Oh! trading card game.
- * Extends the {@link Card} class.
+ * Extends the {@link CardImpl} class.
  */
 @ToString(includeFieldNames = true)
 @Getter

@@ -1,23 +1,18 @@
 package com.example.yugioh.engines;
 
-import com.example.yugioh.enums.DeckType;
 import com.example.yugioh.models.card.Card;
-import com.example.yugioh.models.deck.Deck;
+import com.example.yugioh.models.card.CardImpl;
 import com.example.yugioh.models.deck.DeckSet;
 import com.example.yugioh.models.duel.Duel;
+import com.example.yugioh.models.duel.MasterDuelType;
 import com.example.yugioh.models.player.Player;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public class DuelSimulatorEngine {
-    public static Deck createDeck(String deckName) throws SQLException{
-        Deck deck = new Deck(DeckType.MAIN);
-        List<Card> deckCardsRes = DataBaseEngine.selectCards(deckName);
-        for(Card card : deckCardsRes){
-            deck.getCardList().add(card);
-        }
-        return deck;
+    public static List<CardImpl> createDeck(String deckName) throws SQLException {
+        return DataBaseEngine.selectCardsByName(deckName);
     }
 
     private DuelSimulatorEngine(){}
@@ -26,22 +21,22 @@ public class DuelSimulatorEngine {
         Player player = new Player("Lyna");
         Player opponent = new Player("Lili");
 
-        DeckSet pDeckSet = new DeckSet("deck1");
+        DeckSet playerDeckSet = new DeckSet("deck1");
+
+
         DeckSet opponentDeckSet = new DeckSet("deck2");
 
-        player.getDecks().add(pDeckSet);
-        opponent.getDecks().add(opponentDeckSet);
 
-        player.setDuelDeck(player.getDecks().get(0));
-        opponent.setDuelDeck(opponent.getDecks().get(0));
+        player.setDuelDeck(playerDeckSet);
+        opponent.setDuelDeck(opponentDeckSet);
 
         try {
-            player.getDuelDeck().setMainDeck(createDeck("kuriboh"));
-            opponent.getDuelDeck().setMainDeck(createDeck("kuriboh"));
+            playerDeckSet.getMainDeck().setCardList(createDeck("kuriboh"));
+            opponentDeckSet.getMainDeck().setCardList(createDeck("Kuriboh"));
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return new Duel(player, opponent);
+        return new Duel(player, opponent, new MasterDuelType());
     }
 }

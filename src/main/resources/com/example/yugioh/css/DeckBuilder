@@ -4,3 +4,12 @@
     -fx-background-repeat: no-repeat;
     -fx-background-position: center center;
 }
+
+
+.container{
+    -fx-border-radius: 10px;
+    -fx-border-color: #777777;
+    -fx-border-width: 1px;
+    -fx-background-color: #111925;
+    -fx-margin: 10px 0px 7px 0px;
+}

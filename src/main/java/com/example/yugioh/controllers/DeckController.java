@@ -2,6 +2,7 @@ package com.example.yugioh.controllers;
 
 import com.example.yugioh.engines.DataBaseEngine;
 import com.example.yugioh.models.card.Card;
+import com.example.yugioh.models.card.CardImpl;
 import com.example.yugioh.models.deck.Deck;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -33,7 +34,7 @@ public class DeckController implements Initializable {
     private Deck deck;
 
     public void displayCard(){
-        for (Card c : deck.getCardList()) {
+        for (CardImpl  c : deck.getCardList()) {
             addCard(c);
         }
     }
@@ -63,8 +64,8 @@ public class DeckController implements Initializable {
         boolean success = false;
         if (db.hasString()) {
             if (deck.getCardList().size() < deck.getMaxCard()) {
-                List<Card> res = DataBaseEngine.selectCardById(db.getString());
-                for (Card card: res) {
+                List<CardImpl> res = DataBaseEngine.selectCardById(db.getString());
+                for (CardImpl card: res) {
                     addCard(card);
                     deck.addCard(card);
                 }
@@ -75,9 +76,11 @@ public class DeckController implements Initializable {
         event.consume();
     }
 
-    public void addCard(Card card){
+    public void addCard(CardImpl card){
         card.setImage(new Image(card.getSmallCardImage()));
 
+        card.setFitWidth(150);
+        card.setFitHeight(150);
         int row = cardList.getRowCount();
         int childrenSize = cardList.getChildren().size();
         int col = cardList.getChildren().size() % 5;
@@ -85,7 +88,7 @@ public class DeckController implements Initializable {
         if (childrenSize != 0 && col % 5 == 0) {
             row++;
         }
-        cardList.add(card, col, row - 1);
+        cardList.add(new CardController(card), col, row - 1);
     }
 
     public Deck getDeck() {
@@ -97,7 +100,7 @@ public class DeckController implements Initializable {
     }
 
     public void remove(Event event) {
-        Card node = (Card) event.getTarget();
+        CardImpl node = (CardImpl) event.getTarget();
         deck.removeCard(node);
         cardList.getChildren().remove(node);
     }

@@ -16,7 +16,6 @@ public class DrawPhase extends Phase {
     @Override
     public void play() {
         System.out.println("DRAW PHASE");
-        //TODO make the player draw
     }
 
     /**
@@ -24,6 +23,6 @@ public class DrawPhase extends Phase {
      * @param drawer the current duelist that will draw a card
      */
     public void draw(Player drawer){
-        drawer.draw();
+        System.out.println("DRAW PHASE");
     }
 }

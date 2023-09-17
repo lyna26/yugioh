@@ -20,15 +20,10 @@ public class CardExporterEngine {
      */
     public static void exportApiData() throws SQLException, UnsupportedEncodingException {
         JsonNode cards = ApiEngine.getCardData().get("data");
-        DataBaseEngine.insertCard(cards);
+        DataBaseEngine.insertCards(cards);
     }
 
-    /**
-     * The main method of this class calls the exportApiData function to export card data from the API to the database.
-     *
-     * @throws SQLException                 if there is an error with the SQL query or connection to the database
-     * @throws UnsupportedEncodingException if there is an error with the encoding of the data
-     */
+
     public static void main(String[] args) throws SQLException, UnsupportedEncodingException {
         exportApiData();
     }

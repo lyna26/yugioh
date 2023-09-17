@@ -1,23 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0"
-            prefWidth="100.0" xmlns="http://javafx.com/javafx/19"
-            fx:controller="com.example.yugioh.controllers.CardResultController">
-    <children>
-        <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="100.0" spacing="5.0"
-              AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0"
-              AnchorPane.topAnchor="1.0">
-            <children>
-                <ImageView fx:id="cardImage" fitHeight="100.0" fitWidth="70.0" pickOnBounds="true"
-                           preserveRatio="true"/>
-                <TextArea fx:id="cardInfosFlow" editable="false" maxHeight="100.0" maxWidth="30.0" minHeight="-Infinity"
-                          minWidth="-Infinity" prefHeight="100.0" prefWidth="30.0" promptText="-" scrollLeft="1.0"
-                          scrollTop="1.0" wrapText="true"/>
-            </children>
-        </HBox>
-    </children>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="89.0" prefWidth="319.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.yugioh.controllers.CardResultController">
+    <HBox layoutX="15.0" layoutY="10.0" prefHeight="102.0" prefWidth="304.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <ImageView fx:id="cardImage" fitHeight="92.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER" />
+        <Label fx:id="cardName" prefHeight="38.0" prefWidth="236.0" wrapText="true" HBox.hgrow="ALWAYS" />
+    </HBox>
 </AnchorPane>

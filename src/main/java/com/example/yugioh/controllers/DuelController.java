@@ -3,7 +3,7 @@ package com.example.yugioh.controllers;
 import com.example.yugioh.engines.DuelSimulatorEngine;
 import com.example.yugioh.enums.Face;
 import com.example.yugioh.enums.PhaseEnum;
-import com.example.yugioh.models.card.Card;
+import com.example.yugioh.models.card.CardImpl;
 import com.example.yugioh.models.card.MonsterCard;
 import com.example.yugioh.models.duel.Duel;
 
@@ -68,7 +68,7 @@ public class DuelController implements Initializable {
 
     private final List<MonsterCard> monstersToTribute = new ArrayList<>();
 
-    private Card monsterToSummon;
+    private CardImpl monsterToSummon;
 
     private int nbMonsterToTribute = 0;
     @FXML
@@ -91,7 +91,7 @@ public class DuelController implements Initializable {
         initDuel();
         preparePlayersField();
         preparePlayersLp();
-        duel.play();
+        duel.startNewDuel();
         startTurn();
     }
 
@@ -217,7 +217,7 @@ public class DuelController implements Initializable {
             Button summon = new Button("Summon");
             summon.setOnMouseClicked(this::handleSummon);
             StackPane stackPane = (StackPane) pane;
-            Card card = (Card) stackPane.getChildren().get(0);
+            CardImpl card = (CardImpl) stackPane.getChildren().get(0);
             if(card.getTypes().contains("Monster")){
                 stackPane.getChildren().add(1, summon);
             }
@@ -253,7 +253,7 @@ public class DuelController implements Initializable {
     private void handleSet(MouseEvent event) {
         Button setButton = (Button) event.getSource();
         StackPane stackPane = (StackPane) setButton.getParent();
-        Card toSet = (Card) stackPane.getChildren().get(0);
+        CardImpl toSet = (CardImpl) stackPane.getChildren().get(0);
         toSet.setFace(Face.DOWN);
         monsterToSummon = toSet;
 
@@ -319,11 +319,11 @@ public class DuelController implements Initializable {
 
         if (monsterToSummon.getTypes().contains("Monster"))
         {
-            duel.getCurrentPlayer().putCardOnMonsterZone(stackPane.getParent().getChildrenUnmodifiable().indexOf(stackPane), (MonsterCard) monsterToSummon);
+            //duel.getCurrentPlayer().getField().putCardOnMonsterZone(stackPane.getParent().getChildrenUnmodifiable().indexOf(stackPane), (MonsterCard) monsterToSummon);
         }
         else
         {
-            duel.getCurrentPlayer().putCardOnTheSpellTrapZone(stackPane.getParent().getChildrenUnmodifiable().indexOf(stackPane), monsterToSummon);
+           // duel.getCurrentPlayer().putCardOnTheSpellTrapZone(stackPane.getParent().getChildrenUnmodifiable().indexOf(stackPane), monsterToSummon);
         }
 
     }

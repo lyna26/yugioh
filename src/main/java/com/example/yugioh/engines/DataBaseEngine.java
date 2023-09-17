@@ -1,7 +1,8 @@
 package com.example.yugioh.engines;
 
-import com.example.yugioh.factory.cardFactory.CardFactory;
+import com.example.yugioh.factory.card_factory.CardFactoryImpl;
 import com.example.yugioh.models.card.Card;
+import com.example.yugioh.models.card.CardImpl;
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -24,21 +25,16 @@ import java.util.List;
 @Slf4j
 public class DataBaseEngine {
 
-    /**
-     * This function is a simple select query with the name of the card
-     * @param name name of the card to search
-     * @return the result of the query
-     */
-    public static List<Card> selectCards(String name) throws SQLException {
+    public static List<CardImpl> selectCardsByName(String name) throws SQLException {
         try (
                 Connection connection = connect();
                 PreparedStatement pstm = connection.prepareStatement("SELECT * FROM card WHERE name LIKE ?")
         ) {
             pstm.setString(1, '%' + name + '%');
             ResultSet res = pstm.executeQuery();
-            List<Card> cards = new ArrayList<>();
+            List<CardImpl> cards = new ArrayList<>();
             while (res.next()) {
-                cards.add(CardFactory.createCard(res));
+                cards.add(CardFactoryImpl.createCard(res));
             }
             return cards;
 
@@ -47,21 +43,16 @@ public class DataBaseEngine {
         }
     }
 
-    /**
-     * This function is a select query with the id of the card
-     * @param id id of the card to search
-     * @return the result of the query
-     */
-    public static List<Card> selectCardById(String id) throws SQLException {
+    public static List<CardImpl> selectCardById(String id) throws SQLException {
         try(
                 Connection connection = connect();
                 PreparedStatement pstm = connection.prepareStatement("SELECT * FROM card WHERE id = ?")
         ){
             pstm.setString(1, id);
             ResultSet res = pstm.executeQuery();
-            List<Card> results = new ArrayList<Card>();
+            List<CardImpl> results = new ArrayList<CardImpl>();
             while(res.next()) {
-                results.add(CardFactory.createCard(res));
+                results.add(CardFactoryImpl.createCard(res));
             }
             return results;
         }
@@ -70,10 +61,6 @@ public class DataBaseEngine {
         }
     }
 
-    /**
-     * This function will connect to the database
-     * @return the connexion
-     */
     private static Connection connect() throws SQLException {
         String url =
                 "jdbc:sqlserver://MSI;"
@@ -96,7 +83,7 @@ public class DataBaseEngine {
      * This function will do an insert query
      * @param cards data formatted as Json
      */
-    public static void insertCard(JsonNode cards) throws SQLException {
+    public static void insertCards(JsonNode cards) throws SQLException {
         if (cards == null) {
             String msg = "The cards parameter cannot be null.";
             log.error(msg);

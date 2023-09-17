@@ -5,9 +5,9 @@ public enum Speed {
     SPEED2(2),
     SPEED3(3);
 
-    int speed;
+    final int speedLevel;
 
-    Speed(int seed) {
-        this.speed = speed;
+    Speed(int speedLevel) {
+        this.speedLevel = speedLevel;
     }
 }

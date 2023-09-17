@@ -1,6 +1,6 @@
-package com.example.yugioh.factory.cardFactory;
+package com.example.yugioh.factory.card_factory;
 
-import com.example.yugioh.models.card.Card;
+import com.example.yugioh.models.card.CardImpl;
 import com.example.yugioh.models.card.FusionMonster;
 import com.example.yugioh.models.card.LinkMonster;
 import com.example.yugioh.models.card.NormalMonster;
@@ -15,17 +15,10 @@ import java.sql.SQLException;
 /**
  * A factory class for creating MonsterCard objects.
  */
-public class MonsterCardFactory implements ICardFactory {
+public class MonsterCardFactory implements CardFactory{
 
-    /**
-     * Creates a new MonsterCard object using the provided ResultSet.
-     *
-     * @param card the ResultSet containing the card data
-     * @return a new MonsterCard object
-     * @throws SQLException if there is an error retrieving the data from the ResultSet
-     */
     @Override
-    public Card createCard(ResultSet card) throws SQLException {
+    public CardImpl createCard(ResultSet card) throws SQLException {
         String type = card.getString("type").split(" ")[0].toLowerCase();
 
         switch (type.toLowerCase()) {
@@ -35,16 +28,16 @@ public class MonsterCardFactory implements ICardFactory {
             case "fusion" -> {
                 return new FusionMonster(card);
             }
-            case "Pendulum" -> {
+            case "pendulum" -> {
                 return new PendulumMonster(card);
             }
-            case "Ritual" -> {
+            case "ritual" -> {
                 return new RitualMonster(card);
             }
-            case "Synchro" -> {
+            case "synchro" -> {
                 return new SynchroMonster(card);
             }
-            case "Xyz" -> {
+            case "xyz" -> {
                 return new XyzMonster(card);
             }
             default -> {

@@ -5,13 +5,13 @@ public enum CardType {
     SPELL("Spell"),
     TRAP("Trap");
 
-    private final String cardType;
+    private final String type;
 
-    CardType(String cardType) {
-        this.cardType = cardType;
+    CardType(String type) {
+        this.type = type;
     }
 
-    public String getCardType() {
-        return cardType;
+    public String getType() {
+        return type;
     }
 }

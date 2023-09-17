@@ -14,14 +14,13 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="800.0" prefWidth="800.0" stylesheets="@../css/DeckBuilder" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.yugioh.controllers.DeckBuilderController">
-
     <BorderPane layoutX="2.0" layoutY="1.0" prefHeight="800.0" prefWidth="800.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
         <top>
             <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="800.0">
                 <Button mnemonicParsing="false" text="Button" />
                 <Button mnemonicParsing="false" text="Button" />
                 <Button mnemonicParsing="false" text="Button" />
-                <Button mnemonicParsing="false" onAction="#saveGame" text="Save" />
+                <Button mnemonicParsing="false" text="Save" />
             </HBox>
         </top>
         <left>
@@ -29,22 +28,25 @@
         </left>
         <right>
             <VBox prefHeight="800.0" prefWidth="300.0" BorderPane.alignment="CENTER">
-                <HBox prefHeight="20.0" prefWidth="400.0">
-                    <TextArea fx:id="cardToSearch" prefHeight="47.0" prefWidth="395.0" promptText="enter card name">
+                <HBox prefHeight="20.0" prefWidth="400.0" styleClass="container">
+                    <TextArea fx:id="cardToSearch" prefHeight="47.0" prefWidth="395.0" promptText="enter card name" styleClass="root">
                         <font>
                             <Font size="10.0" />
                         </font>
                     </TextArea>
-                    <Button mnemonicParsing="false" onAction="#searchCard" prefHeight="43.0" prefWidth="63.0" text="find card" />
+                    <Button mnemonicParsing="false" onAction="#searchCard" prefHeight="34.0" prefWidth="31.0" text="find card" />
                 </HBox>
-                <ScrollPane fitToHeight="true" fitToWidth="true" maxWidth="-Infinity" prefHeight="774.0" prefWidth="400.0">
+                <ScrollPane fitToHeight="true" fitToWidth="true" maxWidth="-Infinity" prefHeight="774.0" prefWidth="400.0" styleClass="container">
                     <VBox.margin>
                         <Insets top="20.0" />
                     </VBox.margin>
-                    <GridPane fx:id="cardResultGrid" minWidth="-Infinity" prefHeight="744.0" prefWidth="298.0">
-                        <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" />
-                        </rowConstraints>
+                    <GridPane fx:id="cardResultGrid" hgap="1.0" prefHeight="586.0" prefWidth="298.0" styleClass="root" vgap="1.0">
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="ALWAYS" />
+                        </columnConstraints>
+                  <padding>
+                     <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                  </padding>
                     </GridPane>
                 </ScrollPane>
             </VBox>

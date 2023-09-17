@@ -1,12 +1,11 @@
 package com.example.yugioh.controllers;
 
-import com.example.yugioh.application.Game;
-import com.example.yugioh.engines.DataBaseEngine;
-import com.example.yugioh.models.card.Card;
-import com.example.yugioh.models.deck.DeckSet;
+import com.example.yugioh.models.card.CardImpl;
+import com.example.yugioh.models.deck.DeckBuilderModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,13 +17,18 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Getter
+@Setter
 public class DeckBuilderController implements Initializable {
     @FXML
     TextArea cardToSearch;
@@ -47,26 +51,21 @@ public class DeckBuilderController implements Initializable {
     @FXML
     DeckController extraDeckController;
 
-    private DeckSet deck;
+   DeckBuilderModel deckBuilder;
 
-    private final ObservableList<Card> cardResults = FXCollections.observableArrayList();
+    private final ObservableList<CardImpl> cardResults = FXCollections.observableArrayList();
 
+    @FXML
+    private void searchCard(ActionEvent event) throws SQLException {
+        String cardName = cardToSearch.getText();
 
-    public void setDecks(){
-        mainDeckController.setDeck(deck.getMainDeck());
-        extraDeckController.setDeck(deck.getExtraDeck());
-        sideDeckController.setDeck(deck.getSideDeck());
-
-        mainDeckController.displayCard();
-        extraDeckController.displayCard();
-        sideDeckController.displayCard();
+        if (!cardName.isEmpty()) {
+            List<CardImpl> matchingCards = deckBuilder.searchCardsByName(cardName);
+            cardResults.setAll(matchingCards);
+        }
     }
 
-    public void setDeck(DeckSet deck) {
-        this.deck = deck;
-    }
-
-    public Node  displayCardResults(Card card){
+    public Node displayCardResults(CardImpl card){
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/yugioh/fxml/CardResult.fxml"));
 
@@ -74,8 +73,6 @@ public class DeckBuilderController implements Initializable {
             Parent cardResult = loader.load();
             CardResultController controller = loader.getController();
             controller.setCard(card);
-
-
             cardResult.setOnMouseEntered((event -> cardInfosController.setCard(card)));
 
             cardResult.setOnDragDetected(event -> {
@@ -93,37 +90,27 @@ public class DeckBuilderController implements Initializable {
         }
     }
 
-    public void searchCard() throws SQLException{
-        String cardsToSearch = cardToSearch.getText();
-        if (!cardsToSearch.isEmpty()) {
-            cardResults.setAll(DataBaseEngine.selectCards(cardsToSearch));
-        }
-    }
-
-    public void saveGame() throws IOException {
-        int index = Game.getInstance().getPlayer().getDecks().indexOf(deck);
-        Game.getInstance().getPlayer().getDecks().get(index).setSideDeck(sideDeckController.getDeck());
-        Game.getInstance().getPlayer().getDecks().get(index).setExtraDeck(extraDeckController.getDeck());
-        Game.getInstance().getPlayer().getDecks().get(index).setMainDeck(mainDeckController.getDeck());
-        Game.save();
-    }
-
+    /**
+     * Called to initialize a controller after its root element has been
+     * completely processed.
+     *
+     * @param location  The location used to resolve relative paths for the root object, or
+     *                  {@code null} if the location is not known.
+     * @param resources The resources used to localize the root object, or {@code null} if
+     *                  the root object was not localized.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        cardResults.addListener((ListChangeListener<Card>) change -> {
+        cardResults.addListener((ListChangeListener<CardImpl>) change -> {
             cardResultGrid.getChildren().clear();
-            AtomicInteger countRow = new AtomicInteger(1);
-            AtomicInteger countCol = new AtomicInteger();
+
+            AtomicInteger countRow = new AtomicInteger(0);
 
             cardResults.forEach(card -> {
                 Node cardResult = displayCardResults(card);
-                cardResultGrid.add(cardResult, countCol.get(), countRow.get());
-                countCol.getAndIncrement();
 
-                if (countCol.get() == 2) {
-                    countCol.set(0);
+                cardResultGrid.add(cardResult, 0, countRow.get());
                     countRow.getAndIncrement();
-                }
             });
         });
     }

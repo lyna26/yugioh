@@ -1,6 +1,7 @@
 package com.example.yugioh.controllers;
 
 import com.example.yugioh.application.Game;
+import com.example.yugioh.models.deck.DeckBuilderModel;
 import com.example.yugioh.models.deck.DeckSet;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,12 +40,12 @@ public class DeckMenuController implements Initializable {
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.setTitle("Overlay windows");
                 try {
-                    String interfacePath = "/com/example/yugioh/fxml/" + "DeckBuilder.fxml";
+                    String interfacePath = "/com/example/yugioh/fxml/DeckBuilder.fxml";
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(interfacePath));
                     Parent root = fxmlLoader.load();
                     DeckBuilderController con = fxmlLoader.getController();
-                    con.setDeck(controller.getDeckSet());
-                    con.setDecks();
+                    con.setDeckBuilder(new DeckBuilderModel(controller.getDeckSet()));
+                    //con.setDecks();
                     Scene scene = new Scene(root, 800, 800);
                     stage.setScene(scene);
                     stage.show();

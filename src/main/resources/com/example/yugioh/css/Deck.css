@@ -15,8 +15,3 @@ Label
     -fx-background-color: #111925;
     -fx-margin: 10px 0px 7px 0px; /* Add the margin here */
 }
-
-.gridPane > ImageView{
-     -fx-pref-width: 50px;
-     -fx-pref-height: 50px;
-}

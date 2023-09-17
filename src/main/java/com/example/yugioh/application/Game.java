@@ -36,13 +36,9 @@ public class Game implements Serializable {
                 }
             }
         }
-
         return instance;
     }
 
-    /**
-     * This function is used to load the game instance
-     */
     public static void load() throws IOException, ClassNotFoundException {
         Path filePath = Paths.get(FILE_TO_SAVE);
         if(Files.exists(filePath)) {
@@ -53,9 +49,6 @@ public class Game implements Serializable {
         }
     }
 
-    /**
-     * This function is used to save the game instance
-     */
     public static void save() throws IOException {
         try(FileOutputStream fos = new FileOutputStream(FILE_TO_SAVE);
             ObjectOutputStream oos = new ObjectOutputStream(fos)) {

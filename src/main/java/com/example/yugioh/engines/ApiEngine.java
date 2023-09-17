@@ -9,19 +9,18 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 /**
- * A utility class that provides a method to retrieve card data from the Yu-Gi-Oh! Pro Deck API.
+ * A utility class that provides a method to retrieve cards data from the Yu-Gi-Oh! Pro Deck API.
  */
 public class ApiEngine {
 
     /**
      * This function will collect all cards data from 'db.ygoprodeck.com/api/v7/cardinfo.php?'
      *
-     * @return the result of API research that is a JSonNode type, null otherwise
+     * @return the result of API research
      */
     public static JsonNode getCardData() {
         try {
-            //URL url = new URL("https://db.ygoprodeck.com/api/v7/cardinfo.php?name=astral kuriboh");
-            //URL url = new URL("https://db.ygoprodeck.com/api/v7/cardinfo.php?name=Dark Magician");
+
             URL url = new URL("https://db.ygoprodeck.com/api/v7/cardinfo.php?");
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -36,8 +35,7 @@ public class ApiEngine {
                 throw new RuntimeException("HttpResponseCode: " + responseCode);
             } else {
                 ObjectMapper mapper = new ObjectMapper();
-                JsonNode cardData = mapper.readTree(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8));
-                return cardData;
+                return mapper.readTree(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8));
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -7,14 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Getter
-public class SpellTrapCard extends Card {
+public class SpellTrapCard extends CardImpl {
 
     private String race;
 
-    /**
-     * Constructor used to generate a card from data exported from a database.
-     * @param card ResultSet containing card information.
-     */
+
     public SpellTrapCard(ResultSet card) throws SQLException {
         super(card);
     }
