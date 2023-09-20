@@ -21,7 +21,6 @@ public abstract class MonsterCard extends CardImpl {
     private int def;
     private int level;
     private String attribute;
-    private String race ;
     private Position position;
 
     /**

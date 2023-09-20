@@ -44,9 +44,6 @@
                         <columnConstraints>
                             <ColumnConstraints hgrow="ALWAYS" />
                         </columnConstraints>
-                  <padding>
-                     <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
-                  </padding>
                     </GridPane>
                 </ScrollPane>
             </VBox>

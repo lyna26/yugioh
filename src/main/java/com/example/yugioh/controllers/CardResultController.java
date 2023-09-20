@@ -12,13 +12,14 @@ import javafx.scene.image.ImageView;
 public class CardResultController{
 
     @FXML
-    Label cardName;
+    private Label cardName;
     @FXML
-    ImageView cardImage;
+    private ImageView cardImage;
 
     public void setCard(CardImpl card) {
         cardImage.setImage(new Image(card.getSmallCardImage()));
         cardName.setText(card.getName());
+        addInfos(card);
     }
 
     public Label getCardName() {
@@ -27,5 +28,31 @@ public class CardResultController{
 
     public ImageView getCardImage() {
         return cardImage;
+    }
+
+    public void addInfos(CardImpl card) {
+        String race = card.getRace();
+
+        String newText = cardName.getText() + "\n";
+
+        if (card.getTypes().contains("Monster")){
+            String attribute = card.getAttribute();
+            int level = card.getLevel();
+            int atk = card.getAtk();
+            int def = card.getDef();
+
+            newText =  newText +
+                    race + "/" + attribute + "★" + level + "\n" +
+                    atk + "/" + def;
+
+        }
+        else {
+            String cardType = card.getClass().getName();
+
+            newText =  newText +
+                    cardType + "|" + race;
+        }
+
+        cardName.setText(newText);
     }
 }
