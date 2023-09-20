@@ -9,9 +9,6 @@ import java.sql.SQLException;
 @Getter
 public class SpellTrapCard extends CardImpl {
 
-    private String race;
-
-
     public SpellTrapCard(ResultSet card) throws SQLException {
         super(card);
     }

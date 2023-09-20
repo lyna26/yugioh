@@ -32,7 +32,7 @@ public abstract class CardImpl extends ImageView implements Serializable, Card {
     private final String smallCardImage;
     private String backImage = "C://Users//Lola//IdeaProjects//demo//src//main//resources//com//example//yugioh//images//Yugioh_Card_Back.jpg";
     private final List<String> types;
-    private final String monsterRace;
+    private final String race;
     private Face face = Face.UP;
 
     public CardImpl(ResultSet card) throws SQLException {
@@ -41,9 +41,10 @@ public abstract class CardImpl extends ImageView implements Serializable, Card {
         this.description = card.getString("desc");
         this.smallCardImage = card.getString("image_url_small");
         this.bigCardImage = card.getString("image_url");
-        this.monsterRace =  card.getString("race");
+        this.race =  card.getString("race");
         this.types = parseTypeList(card.getString("type"));
     }
+
 
     /**
      * Parses a string of types and sets the types of this card accordingly.
