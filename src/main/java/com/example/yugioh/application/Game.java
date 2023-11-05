@@ -42,10 +42,17 @@ public class Game implements Serializable {
     public static void load() throws IOException, ClassNotFoundException {
         Path filePath = Paths.get(FILE_TO_SAVE);
         if(Files.exists(filePath)) {
+            System.out.println("A saved game exists. We will continue playing with it");
             try (FileInputStream fileInputStream = new FileInputStream(FILE_TO_SAVE);
                  ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
                 gameInstance.set((Game) objectInputStream.readObject());
             }
+        }else{
+            System.out.println("File doesn't exist. It is a new game");
+            Game game = new Game();
+            game.setPlayer(new Player("new player"));
+            gameInstance.set(game);
+            save();
         }
     }
 

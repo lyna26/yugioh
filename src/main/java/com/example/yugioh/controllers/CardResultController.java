@@ -1,6 +1,7 @@
 package com.example.yugioh.controllers;
 
 
+import com.example.yugioh.enums.CardType;
 import com.example.yugioh.models.card.CardImpl;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -44,15 +45,18 @@ public class CardResultController{
             newText =  newText +
                     race + "/" + attribute + "★" + level + "\n" +
                     atk + "/" + def;
-
         }
         else {
-            String cardType = card.getClass().getName();
+            String cardType = "";
 
+            for (CardType type : CardType.values()) {
+                if(card.getTypes().contains(type.getType())){
+                    cardType = type.getType();
+                }
+            }
             newText =  newText +
                     cardType + "|" + race;
         }
-
         cardName.setText(newText);
     }
 }

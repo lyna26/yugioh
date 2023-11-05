@@ -19,18 +19,20 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import lombok.Getter;
 
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class DeckController implements Initializable {
+public class DeckController {
     @FXML
     GridPane cardList;
 
     @FXML
     Label deckType;
+    @Getter
     private Deck deck;
 
     public void displayCard(){
@@ -91,10 +93,6 @@ public class DeckController implements Initializable {
         cardList.add(new CardController(card), col, row - 1);
     }
 
-    public Deck getDeck() {
-        return deck;
-    }
-
     public void setDeck(Deck deck) {
         this.deck = deck;
     }
@@ -103,11 +101,5 @@ public class DeckController implements Initializable {
         CardImpl node = (CardImpl) event.getTarget();
         deck.removeCard(node);
         cardList.getChildren().remove(node);
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-
     }
 }

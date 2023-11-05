@@ -1,5 +1,8 @@
 package com.example.yugioh.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum CardType {
     MONSTER("Monster"),
     SPELL("Spell"),
@@ -9,9 +12,5 @@ public enum CardType {
 
     CardType(String type) {
         this.type = type;
-    }
-
-    public String getType() {
-        return type;
     }
 }
