@@ -18,7 +18,7 @@ public class Game implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
     //private static final String FILE_TO_SAVE = "System.getProperty("user.home") + "/yugioh/save";";
-    private static final String FILE_TO_SAVE = "C:/Users/Lola/IdeaProjects/demo/src/main/resources/com/example/yugioh/game.ser";
+    private static final String FILE_TO_SAVE = "/game.ser";
     private static final AtomicReference<Game> gameInstance = new AtomicReference<>();
     private Player player;
 

@@ -20,7 +20,7 @@
                 <Button mnemonicParsing="false" text="Button" />
                 <Button mnemonicParsing="false" text="Button" />
                 <Button mnemonicParsing="false" text="Button" />
-                <Button mnemonicParsing="false" text="Save" />
+                <Button mnemonicParsing="false" text="Save" onAction="#saveGame" />
             </HBox>
         </top>
         <left>

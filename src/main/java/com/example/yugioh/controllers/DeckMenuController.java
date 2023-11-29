@@ -24,7 +24,6 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class DeckMenuController implements Initializable {
-
     @FXML
     public Button searchDeck;
     @FXML
@@ -45,7 +44,7 @@ public class DeckMenuController implements Initializable {
                     Parent root = fxmlLoader.load();
                     DeckBuilderController con = fxmlLoader.getController();
                     con.setDeckBuilder(new DeckBuilderModel(controller.getDeckSet()));
-                    //con.setDecks();
+                    con.setDecks();
                     Scene scene = new Scene(root, 800, 800);
                     stage.setScene(scene);
                     stage.show();

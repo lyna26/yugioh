@@ -19,6 +19,7 @@ public class CardExporterEngine {
      * @throws UnsupportedEncodingException if there is an error with the encoding of the data
      */
     public static void exportApiData() throws SQLException, UnsupportedEncodingException {
+
         JsonNode cards = ApiEngine.getCardData().get("data");
         DataBaseEngine.insertCards(cards);
     }
