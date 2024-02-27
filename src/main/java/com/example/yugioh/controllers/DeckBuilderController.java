@@ -1,7 +1,9 @@
 package com.example.yugioh.controllers;
 
+import com.example.yugioh.application.Game;
 import com.example.yugioh.models.card.CardImpl;
 import com.example.yugioh.models.deck.DeckBuilderModel;
+import com.example.yugioh.models.deck.DeckSet;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -90,15 +92,15 @@ public class DeckBuilderController implements Initializable {
         }
     }
 
-    /**
-     * Called to initialize a controller after its root element has been
-     * completely processed.
-     *
-     * @param location  The location used to resolve relative paths for the root object, or
-     *                  {@code null} if the location is not known.
-     * @param resources The resources used to localize the root object, or {@code null} if
-     *                  the root object was not localized.
-     */
+    public void setDecks(){
+        mainDeckController.setDeck(deckBuilder.getDeck().getMainDeck());
+        extraDeckController.setDeck(deckBuilder.getDeck().getExtraDeck());
+        sideDeckController.setDeck(deckBuilder.getDeck().getSideDeck());
+        mainDeckController.displayCard();
+        extraDeckController.displayCard();
+        sideDeckController.displayCard();
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         cardResults.addListener((ListChangeListener<CardImpl>) change -> {
@@ -114,4 +116,14 @@ public class DeckBuilderController implements Initializable {
             });
         });
     }
+
+    public void saveGame() throws IOException {
+        List<DeckSet> playerDecks = Game.getInstance().getPlayer().getDecks();
+        DeckSet currentDeck = playerDecks.get(playerDecks.indexOf(deckBuilder.getDeck()));
+        currentDeck.setMainDeck(mainDeckController.getDeck());
+        currentDeck.setSideDeck(sideDeckController.getDeck());
+        currentDeck.setExtraDeck(extraDeckController.getDeck());
+        Game.save();
+    }
+
 }

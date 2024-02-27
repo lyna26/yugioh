@@ -20,7 +20,7 @@
                 <Button mnemonicParsing="false" text="Button" />
                 <Button mnemonicParsing="false" text="Button" />
                 <Button mnemonicParsing="false" text="Button" />
-                <Button mnemonicParsing="false" text="Save" />
+                <Button mnemonicParsing="false" text="Save" onAction="#saveGame" />
             </HBox>
         </top>
         <left>
@@ -36,11 +36,11 @@
                     </TextArea>
                     <Button mnemonicParsing="false" onAction="#searchCard" prefHeight="34.0" prefWidth="31.0" text="find card" />
                 </HBox>
-                <ScrollPane fitToHeight="true" fitToWidth="true" maxWidth="-Infinity" prefHeight="774.0" prefWidth="400.0" styleClass="container">
+                <ScrollPane fitToHeight="true" fitToWidth="true" maxWidth="-Infinity" prefWidth="400.0" styleClass="container">
                     <VBox.margin>
                         <Insets top="20.0" />
                     </VBox.margin>
-                    <GridPane fx:id="cardResultGrid" hgap="1.0" prefHeight="586.0" prefWidth="298.0" styleClass="root" vgap="1.0">
+                    <GridPane fx:id="cardResultGrid" hgap="1.0" prefHeight="1000.0" prefWidth="298.0" styleClass="root" vgap="1.0">
                         <columnConstraints>
                             <ColumnConstraints hgrow="ALWAYS" />
                         </columnConstraints>

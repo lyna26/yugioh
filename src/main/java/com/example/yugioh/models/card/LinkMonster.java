@@ -13,8 +13,6 @@ import java.sql.SQLException;
  * Extends the {@link MonsterCard} class.
  */
 @ToString(includeFieldNames = true)
-@Getter
-@Setter
 public class LinkMonster extends MonsterCard {
     private final int link;
     private final String linkArraws;
@@ -23,5 +21,15 @@ public class LinkMonster extends MonsterCard {
         super(card);
         this.link = card.getInt("linkval");
         this.linkArraws = card.getString("linkmarkers");
+    }
+
+    @Override
+    public int getLink() {
+        return link;
+    }
+
+    @Override
+    public String getLinkArraws() {
+        return linkArraws;
     }
 }

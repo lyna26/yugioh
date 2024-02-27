@@ -1,5 +1,6 @@
 package com.example.yugioh.engines;
 
+import com.example.yugioh.enums.LinkMarker;
 import com.example.yugioh.factory.card_factory.CardFactoryImpl;
 import com.example.yugioh.models.card.Card;
 import com.example.yugioh.models.card.CardImpl;
@@ -117,7 +118,22 @@ public class DataBaseEngine {
                         pstm.setString(9, card.path("attribute").asText());
                         pstm.setString(10, node.path("image_url").asText());
                         pstm.setInt(11, card.path("linkval").asInt());
-                        pstm.setString(12, card.path("linkmarkers").asText());
+
+                        StringBuilder linkMarkersBuilder = new StringBuilder();
+                        JsonNode markers = card.path("linkmarkers");
+                        for (JsonNode marker : markers) {
+                            String arrow = LinkMarker.getArrowForMarker(marker.asText());
+                            linkMarkersBuilder.append(arrow).append(", ");
+                        }
+                        String linkMarkers = linkMarkersBuilder.toString();
+                        if (linkMarkers.length() > 0) {
+                            linkMarkers = linkMarkers.substring(0, linkMarkers.length() - 2);
+                        }
+
+                        pstm.setString(12, linkMarkers);
+
+                        pstm.setString(12, linkMarkers);
+
                         pstm.setInt(13, card.path("scale").asInt());
                         pstm.setString(14, node.path("image_url_small").asText());
                         pstm.addBatch();
