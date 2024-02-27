@@ -7,9 +7,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import lombok.Getter;
 
-
-
+@Getter
 public class CardResultController{
 
     @FXML
@@ -23,28 +23,34 @@ public class CardResultController{
         addInfos(card);
     }
 
-    public Label getCardName() {
-        return cardName;
-    }
-
-    public ImageView getCardImage() {
-        return cardImage;
-    }
-
     public void addInfos(CardImpl card) {
         String race = card.getRace();
+
+        int atk = card.getAtk();
 
         String newText = cardName.getText() + "\n";
 
         if (card.getTypes().contains("Monster")){
             String attribute = card.getAttribute();
-            int level = card.getLevel();
-            int atk = card.getAtk();
-            int def = card.getDef();
 
             newText =  newText +
-                    race + "/" + attribute + "★" + level + "\n" +
-                    atk + "/" + def;
+                    attribute  + "/" +  race ;
+
+            //case link monster
+            if(card.getTypes().contains("Link")){
+                newText += "[" + card.getLinkArraws() + "]" + "\n" + atk + "/LINK-"  + card.getLink();
+            }
+            else{
+                int level = card.getLevel();
+
+                newText += "★" + level;
+
+                if (card.getTypes().contains("Pendulum")){
+                    newText += "♦" + card.getScale();
+                }
+
+                newText += "\n" + atk +"/" + card.getDef();
+            }
         }
         else {
             String cardType = "";

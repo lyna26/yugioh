@@ -19,4 +19,14 @@ public interface Card {
     Position getPosition();
     String getRace();
     List<String> getTypes();
+
+    default int getScale() {
+        return -1;
+    }
+    default int getLink (){
+        return -1;
+    }
+    default String  getLinkArraws(){
+        return null;
+    }
 }
