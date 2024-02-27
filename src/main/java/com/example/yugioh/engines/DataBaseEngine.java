@@ -68,7 +68,7 @@ public class DataBaseEngine {
                         + "database=yugioh;"
                         + "integratedSecurity=false;"
                         + "user=Lola;"
-                        + "password=Test1234;"
+                        + "password=test1234;"
                         + "encrypt=false;"
                         + "sendStringParametersAsUnicode=true;"
                         + "useBulkCopyForBatchInsert=true;"
