@@ -58,7 +58,7 @@ public class DeckBuilderController implements Initializable {
     private final ObservableList<CardImpl> cardResults = FXCollections.observableArrayList();
 
     @FXML
-    private void searchCard(ActionEvent event) throws SQLException {
+    private void searchCard() throws SQLException {
         String cardName = cardToSearch.getText();
 
         if (!cardName.isEmpty()) {

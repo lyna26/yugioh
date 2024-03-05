@@ -15,17 +15,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class DeckMenuController implements Initializable {
     @FXML
     public Button searchDeck;
+
     @FXML
     ListView deckList;
 
@@ -48,8 +46,6 @@ public class DeckMenuController implements Initializable {
                     Scene scene = new Scene(root, 800, 800);
                     stage.setScene(scene);
                     stage.show();
-                } catch (MalformedURLException e) {
-                    throw new RuntimeException(e);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -70,8 +66,7 @@ public class DeckMenuController implements Initializable {
                 controller.setDeckSetName();
                 cardResult.setUserData(controller);
                 deckList.getItems().add(cardResult);
-            } catch (MalformedURLException e) {
-            } catch (IOException e) {
+            } catch (IOException ignored) {
 
             }
         }
