@@ -5,12 +5,8 @@
 <?import javafx.scene.layout.VBox?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19"
             fx:controller="com.example.yugioh.controllers.DeckSetController">
-    <children>
-        <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0"
-              AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
-            <children>
-                <Label fx:id="deckSetName" prefHeight="38.0" prefWidth="598.0" text="Label"/>
-            </children>
-        </VBox>
-    </children>
+    <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0"
+          AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
+        <Label fx:id="deckSetName" prefHeight="38.0" prefWidth="598.0" text="Label"/>
+    </VBox>
 </AnchorPane>
