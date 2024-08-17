@@ -7,14 +7,10 @@ import lombok.ToString;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
- * A class representing a trap card in the Yu-Gi-Oh! trading card game.
- * Extends the {@link CardImpl} class.
- */
-@ToString(includeFieldNames = true)
 @Getter
 @Setter
-public class TrapCard extends SpellTrapCard {
+@ToString
+public class TrapCard extends CardImpl {
     public TrapCard(ResultSet card) throws SQLException {
         super(card);
     }
