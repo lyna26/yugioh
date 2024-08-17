@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.yugioh.controllers.BattleFieldController">
+    <VBox alignment="CENTER" layoutY="7.0" spacing="10.0">
+        <fx:include fx:id="opponentField" source="Field.fxml"/>
+        <fx:include fx:id="duelistField" source="Field.fxml"/>
+    </VBox>
+</AnchorPane>

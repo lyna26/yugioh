@@ -1,5 +1,8 @@
 package com.example.yugioh.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum DeckType {
     MAIN(40, 60),
     EXTRA(0, 15),
@@ -13,11 +16,4 @@ public enum DeckType {
         this.maxCard = maxCard;
     }
 
-    public int getMinCard() {
-        return minCard;
-    }
-
-    public int getMaxCard() {
-        return maxCard;
-    }
 }

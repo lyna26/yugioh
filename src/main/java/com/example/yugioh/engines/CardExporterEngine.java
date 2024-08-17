@@ -21,7 +21,7 @@ public class CardExporterEngine {
     public static void exportApiData() throws SQLException, UnsupportedEncodingException {
 
         JsonNode cards = ApiEngine.getCardData().get("data");
-        DataBaseEngine.insertCards(cards);
+        DeckRepository.insertCards(cards);
     }
 
 

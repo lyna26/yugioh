@@ -2,57 +2,73 @@ package com.example.yugioh.models.deck;
 
 import com.example.yugioh.enums.DeckType;
 import com.example.yugioh.models.card.Card;
-
 import com.example.yugioh.models.card.CardImpl;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serial;
 import java.io.Serializable;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 /**
- * A class representing a deck of cards in the Yu-Gi-Oh trading card game.
+ * A class representing a deck in the Yu-Gi-Oh trading card game.
  */
 
-@Getter
-@Setter
+@Slf4j
 public class Deck implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
-
-    private final int minCard;
-    private final int maxCard;
+    @Getter
     private List<CardImpl> cardList;
+    private DeckType type;
 
-    public Deck(DeckType deckType) {
+    public Deck(DeckType type) {
         this.cardList = new ArrayList<>();
-        this.minCard = deckType.getMinCard();
-        this.maxCard = deckType.getMaxCard();
+        this.type = type;
     }
+
 
     public boolean isValidSize() {
         int size = cardList.size();
-        return (size >= minCard || size <= maxCard);
+        return (size >= getMinCard() || size <= getMaxCard());
     }
 
     public boolean isValid() {
         return isValidSize();
     }
+
     public void addCard(CardImpl card) {
-        cardList.add(card);
+        if (cardList.size() + 1 <= getMaxCard()) {
+            cardList.add(card);
+        } else {
+            log.warn("Deck is full, cannot add more cards.");
+        }
     }
+
     public Optional<CardImpl> drawCard() {
         return cardList.stream().findFirst();
     }
+
     public void removeCard(Card card) {
-        cardList.remove(card);
+        cardList.removeIf(c -> c.equals(card));
     }
+
     public void shuffle() {
         Collections.shuffle(cardList);
+    }
+
+    public int getMinCard() {
+        return this.type.getMinCard();
+    }
+
+    public int getMaxCard() {
+        return this.type.getMaxCard();
+    }
+
+    public String getType(){
+        return this.type.name();
     }
 }

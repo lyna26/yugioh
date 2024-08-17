@@ -1,7 +1,7 @@
 package com.example.yugioh.controllers;
 
-import com.example.yugioh.engines.DataBaseEngine;
-import com.example.yugioh.models.card.Card;
+import com.example.yugioh.engines.DeckRepository;
+import com.example.yugioh.enums.DeckType;
 import com.example.yugioh.models.card.CardImpl;
 import com.example.yugioh.models.deck.Deck;
 import javafx.event.Event;
@@ -20,25 +20,29 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class DeckController {
+@Getter
+@Setter
+public class DeckController implements Initializable {
     @FXML
-    GridPane cardList;
+    private GridPane cardList;
 
     @FXML
-    Label deckType;
-    @Getter
+    private Label deckType;
+
     private Deck deck;
 
+
+    public DeckController() {}
+
     public void displayCard(){
-        for (CardImpl  c : deck.getCardList()) {
-            addCard(c);
-        }
+        deck.getCardList().forEach(this::addCard);
     }
 
     public void dragOver(DragEvent event) {
@@ -66,7 +70,7 @@ public class DeckController {
         boolean success = false;
         if (db.hasString()) {
             if (deck.getCardList().size() < deck.getMaxCard()) {
-                List<CardImpl> res = DataBaseEngine.selectCardById(db.getString());
+                List<CardImpl> res = DeckRepository.selectCardById(db.getString());
                 for (CardImpl card: res) {
                     addCard(card);
                     deck.addCard(card);
@@ -79,27 +83,39 @@ public class DeckController {
     }
 
     public void addCard(CardImpl card){
+        try {
+            deck.addCard(card);
+            CardController cardController = new CardController(card);
+
+            int row = cardList.getRowCount();
+            int childrenSize = cardList.getChildren().size();
+            int col = childrenSize % 5;
+
+            if (childrenSize != 0 && col % 5 == 0) {
+                row++;
+            }
+            cardList.add(cardController, col, row - 1);
+        } catch (Exception ignored) {
+
+        }
+
+
         card.setImage(new Image(card.getSmallCardImage()));
 
         card.setFitWidth(150);
         card.setFitHeight(150);
-        int row = cardList.getRowCount();
-        int childrenSize = cardList.getChildren().size();
-        int col = cardList.getChildren().size() % 5;
-
-        if (childrenSize != 0 && col % 5 == 0) {
-            row++;
-        }
-        cardList.add(new CardController(card), col, row - 1);
     }
-
-    public void setDeck(Deck deck) {
-        this.deck = deck;
-    }
-
     public void remove(Event event) {
         CardImpl node = (CardImpl) event.getTarget();
         deck.removeCard(node);
         cardList.getChildren().remove(node);
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (deck != null) {
+            this.deckType.setText(deck.getType());
+            displayCard();
+        }
     }
 }

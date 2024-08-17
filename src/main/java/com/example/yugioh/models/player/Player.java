@@ -25,6 +25,7 @@ public class Player implements Serializable {
     private DeckSet duelDeck;
     private transient Field field;
     private transient LpProgressBar lp;
+    private DeckSet modifiedDeck ;
     private transient boolean isMonsterNormalSummoned;
     private String sleeve = "C://Users//Lola//IdeaProjects//demo//src//main//resources//com//example//yugioh//images//Yugioh_Card_Back.jpg";
 

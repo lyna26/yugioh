@@ -1,0 +1,23 @@
+.root{
+    -fx-background-image:url("../images/bg.jpg");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+}
+
+Text{
+     -fx-fill: white; /* Change the text color here */
+}
+
+.list-view {
+    -fx-background-color: #f0f0f0;
+}
+
+.list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 10px;
+}
+
+.list-cell:selected {
+    -fx-background-color: #e0e0e0;
+}

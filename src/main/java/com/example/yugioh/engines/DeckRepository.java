@@ -2,7 +2,6 @@ package com.example.yugioh.engines;
 
 import com.example.yugioh.enums.LinkMarker;
 import com.example.yugioh.factory.card_factory.CardFactoryImpl;
-import com.example.yugioh.models.card.Card;
 import com.example.yugioh.models.card.CardImpl;
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.AccessLevel;
@@ -22,11 +21,13 @@ import java.util.List;
 /**
  * This class is an engine that will communicate with database.
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Slf4j
-public class DataBaseEngine {
+public class DeckRepository {
 
-    public static List<CardImpl> selectCardsByName(String name) throws SQLException {
+    public DeckRepository() {
+    }
+
+    public List<CardImpl> selectCardsByName(String name)  {
         try (
                 Connection connection = connect();
                 PreparedStatement pstm = connection.prepareStatement("SELECT * FROM card WHERE name LIKE ?")
@@ -40,7 +41,12 @@ public class DataBaseEngine {
             return cards;
 
         } catch (SQLException e) {
-            throw new SQLException(e);
+            log.error(e.getMessage());
+            try {
+                throw new SQLException(e);
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
 
@@ -126,7 +132,7 @@ public class DataBaseEngine {
                             linkMarkersBuilder.append(arrow).append(", ");
                         }
                         String linkMarkers = linkMarkersBuilder.toString();
-                        if (linkMarkers.length() > 0) {
+                        if (!linkMarkers.isEmpty()) {
                             linkMarkers = linkMarkers.substring(0, linkMarkers.length() - 2);
                         }
 
