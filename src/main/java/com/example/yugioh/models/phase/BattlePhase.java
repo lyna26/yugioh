@@ -2,11 +2,8 @@ package com.example.yugioh.models.phase;
 
 import com.example.yugioh.enums.PhaseEnum;
 import com.example.yugioh.enums.Position;
-import com.example.yugioh.models.card.MonsterCard;
 import com.example.yugioh.models.player.Player;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Slf4j
 public class BattlePhase extends Phase {

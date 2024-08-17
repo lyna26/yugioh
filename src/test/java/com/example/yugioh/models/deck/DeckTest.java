@@ -1,17 +1,12 @@
 package com.example.yugioh.models.deck;
 
 import com.example.yugioh.enums.DeckType;
-import com.example.yugioh.models.card.Card;
 import com.example.yugioh.models.card.CardImpl;
-import com.example.yugioh.models.card.NormalMonster;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.util.Collections.emptyList;
-import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
