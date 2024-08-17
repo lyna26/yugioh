@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
 
 class DeckTest {
     @Test
-    void should_instanciate_deck_with_correct_min_max_and_emptyList() {
+    void should_create_deck_with_correct_min_max_and_emptyList() {
 
         //Given
         DeckType mockedType = mock(DeckType.class);
@@ -38,11 +38,16 @@ class DeckTest {
     @Test
     void should_add_card_to_deck(){
 
-        Deck deck = new Deck(mock(DeckType.class));
+        DeckType mockedType = mock(DeckType.class);
+        when(mockedType.getMaxCard()).thenReturn(1);
+        when(mockedType.getMinCard()).thenReturn(0);
+
+        Deck deck = new Deck(mockedType);
 
         int expectedNbCard = 1;
 
         // When
+        deck.addCard(mock(NormalMonster.class));
         deck.addCard(mock(NormalMonster.class));
 
         // Then
@@ -71,7 +76,7 @@ class DeckTest {
         CardImpl card1 = mock(NormalMonster.class);
         CardImpl card2 = mock(NormalMonster.class);
 
-        Deck deck  = new Deck(mock(DeckType.class));
+        Deck deck  = new Deck(DeckType.MAIN);
         deck.addCard(card1);
         deck.addCard(card2);
 

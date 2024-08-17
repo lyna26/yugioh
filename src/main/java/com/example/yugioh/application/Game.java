@@ -1,19 +1,16 @@
 package com.example.yugioh.application;
 
 import com.example.yugioh.models.player.Player;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serial;
-import java.io.Serializable;
+import lombok.Getter;
+
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.concurrent.atomic.AtomicReference;
 
 
+@Getter
 public class Game implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -56,17 +53,14 @@ public class Game implements Serializable {
         }
     }
 
-    public static void save() throws IOException {
+    public static void save()  {
         try(FileOutputStream fos = new FileOutputStream(FILE_TO_SAVE);
             ObjectOutputStream oos = new ObjectOutputStream(fos)) {
             oos.writeObject(gameInstance.get());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
-
-    public Player getPlayer() {
-        return player;
-    }
-
     public void setPlayer(Player player) {
         this.player = player;
     }

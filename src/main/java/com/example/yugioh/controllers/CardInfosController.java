@@ -35,24 +35,4 @@ public class CardInfosController implements Initializable {
     public void setCard(CardImpl card) {
         cardProperty.set(card);
     }
-
-    public Text getCardName() {
-        return cardName;
-    }
-
-    public ImageView getCardImage() {
-        return cardImage;
-    }
-
-    public Text getCardDesc() {
-        return cardDesc;
-    }
-
-    public CardImpl getCardProperty() {
-        return cardProperty.get();
-    }
-
-    public ObjectProperty<CardImpl> cardPropertyProperty() {
-        return cardProperty;
-    }
 }

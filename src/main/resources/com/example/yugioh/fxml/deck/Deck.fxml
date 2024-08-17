@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="800.0" prefWidth="800.0" stylesheets="@../../css/Deck.css" fx:controller="com.example.yugioh.controllers.DeckController" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+    <VBox prefHeight="800.0" prefWidth="800.0" spacing="7.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0" >
+        <Label fx:id="deckType" prefHeight="50.0" prefWidth="800.0" styleClass="container" stylesheets="@../../css/Deck.css" text="Label">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+        <GridPane fx:id="cardList" alignment="CENTER" gridLinesVisible="true" onDragDropped="#dragDropped" onDragEntered="#dragEntered" onDragExited="#dragExited" onDragOver="#dragOver" prefHeight="756.0" prefWidth="798.0" VBox.vgrow="NEVER">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <styleClass>
+            <String fx:value="gridPane" />
+            <String fx:value="container" />
+         </styleClass>
+        </GridPane>
+      <padding>
+         <Insets top="10.0" />
+      </padding>
+    </VBox>
+</AnchorPane>

@@ -3,6 +3,7 @@ package com.example.yugioh.models.deck;
 import com.example.yugioh.enums.DeckType;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.Value;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -14,23 +15,16 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class DeckSet implements Serializable {
-
     @Serial private static final long serialVersionUID = 1L;
-    private String name;
-    private Deck mainDeck;
-    private Deck extraDeck;
-    private Deck sideDeck;
+    String name;
+    Deck mainDeck;
+    Deck extraDeck;
+    Deck sideDeck;
 
     public DeckSet(String name) {
         this.name = name;
         mainDeck = new Deck(DeckType.MAIN);
         extraDeck = new Deck(DeckType.EXTRA);
         sideDeck = new Deck(DeckType.SIDE);
-    }
-
-    public void updateAllDecks(Deck mainDeck, Deck extraDeck, Deck sideDeck) {
-        setMainDeck(mainDeck);
-        setExtraDeck(extraDeck);
-        setSideDeck(sideDeck);
     }
 }

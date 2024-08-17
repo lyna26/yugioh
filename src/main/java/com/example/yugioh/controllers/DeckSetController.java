@@ -1,29 +1,68 @@
 package com.example.yugioh.controllers;
 
+import com.example.yugioh.application.Game;
+import com.example.yugioh.models.deck.Deck;
 import com.example.yugioh.models.deck.DeckSet;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.layout.AnchorPane;
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
-public class DeckSetController {
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+@Getter
+@Slf4j
+public class DeckSetController implements Initializable {
 
     @FXML
-    Label deckSetName;
+    private AnchorPane mainDeck;
+    @FXML
+    private DeckController mainDeckController;
 
-    private DeckSet deckSet;
+    @FXML
+    private AnchorPane sideDeck;
+    @FXML
+    private DeckController sideDeckController;
+    @FXML
+    private AnchorPane extraDeck;
+    @FXML
+    private DeckController extraDeckController;
 
-    public void setDeckSetName() {
-        deckSetName.setText(deckSet.getName());
+    private final ObjectProperty<DeckSet> deckSet = new SimpleObjectProperty<>();
+
+    public DeckSetController() {
+        this(Game.getInstance().getPlayer().getModifiedDeck());
     }
 
-    public Label getDeckSetName() {
-        return deckSetName;
+    public DeckSetController(DeckSet deckSet) {
+        this.deckSet.set(deckSet);
     }
 
-    public DeckSet getDeckSet() {
-        return deckSet;
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        deckSet.addListener((obs, oldValue, newValue) -> {
+            if (newValue != null) {
+                loadDeckFXML(mainDeck, newValue.getMainDeck(), mainDeckController);
+                loadDeckFXML(sideDeck, newValue.getSideDeck(), sideDeckController);
+                loadDeckFXML(extraDeck, newValue.getExtraDeck(), extraDeckController);
+            }
+        });
     }
 
-    public void setDeckSet(DeckSet deckSet) {
-        this.deckSet = deckSet;
+    private void loadDeckFXML(AnchorPane pane, Deck deck, DeckController controller) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/yugioh/fxml/deck/Deck.fxml"));
+            pane.getChildren().setAll((AnchorPane) loader.load());
+            controller = loader.getController();
+            controller.setDeck(deck);
+        } catch (IOException e) {
+            log.error("Failed to load Deck.fxml", e);
+        }
     }
 }
