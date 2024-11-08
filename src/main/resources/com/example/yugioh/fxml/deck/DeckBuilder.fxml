@@ -23,7 +23,7 @@
             </HBox>
         </top>
         <left>
-            <fx:include fx:id="cardInfos" minWidth="-Infinity" source="../card/CardInfos.fxml" />
+            <fx:include fx:id="cardInfos"  source="../card/CardInfos.fxml" />
         </left>
         <right>
             <VBox prefHeight="800.0" prefWidth="300.0" BorderPane.alignment="CENTER">

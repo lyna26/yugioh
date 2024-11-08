@@ -2,6 +2,7 @@ package com.example.yugioh.controllers;
 
 import com.example.yugioh.application.Game;
 import com.example.yugioh.engines.DeckRepository;
+import com.example.yugioh.models.card.Card;
 import com.example.yugioh.models.card.CardImpl;
 import com.example.yugioh.models.deck.DeckBuilderModel;
 import javafx.collections.FXCollections;
@@ -48,7 +49,7 @@ public class DeckBuilderController implements Initializable {
 
     private DeckBuilderModel deckBuilderModel;
 
-    private final ObservableList<CardImpl> cardResults = FXCollections.observableArrayList();
+    private final ObservableList<Card> cardResults = FXCollections.observableArrayList();
 
     @FXML
     private void searchCard(){
@@ -60,8 +61,8 @@ public class DeckBuilderController implements Initializable {
 
     private void performSearch(String cardName) {
         try{
-            log.info("searching for card" + cardName);
-            List<CardImpl> matchingCards = deckBuilderModel.searchCardsByName(cardName);
+            log.info("searching for card " + cardName);
+            List<Card> matchingCards = deckBuilderModel.searchCardsByName(cardName);
             cardResults.setAll(matchingCards);
         }
         catch (Exception exception){
@@ -76,7 +77,7 @@ public class DeckBuilderController implements Initializable {
         Game.save();
     }
 
-    private Node createCardResultNode(CardImpl card){
+    private Node createCardResultNode(Card card){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/yugioh/fxml/card/CardResult.fxml"));
             Parent cardResult = loader.load();
@@ -93,14 +94,12 @@ public class DeckBuilderController implements Initializable {
         }
     }
 
-    private void configureCardResultEvent(CardImpl card, Parent cardResult) {
+    private void configureCardResultEvent(Card card, Parent cardResult) {
         cardResult.setOnMouseEntered((event -> cardInfosController.setCard(card)));
-        cardResult.setOnDragDetected(event -> {
-            handleDrag(card, event, cardResult);
-        });
+        cardResult.setOnDragDetected(event -> handleDrag(card, event, cardResult));
     }
 
-    private static void handleDrag(CardImpl card, MouseEvent event, Parent cardResult) {
+    private static void handleDrag(Card card, MouseEvent event, Parent cardResult) {
         Dragboard db = cardResult.startDragAndDrop(TransferMode.ANY);
         ClipboardContent content = new ClipboardContent();
         content.putString(String.valueOf(card.getCardId()));
@@ -112,7 +111,7 @@ public class DeckBuilderController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         deckBuilderModel = new DeckBuilderModel(Game.getInstance().getPlayer().getModifiedDeck(), new DeckRepository());
 
-        cardResults.addListener((ListChangeListener<CardImpl>) change -> {
+        cardResults.addListener((ListChangeListener<Card>) change -> {
             cardResultGrid.getChildren().clear();
 
             AtomicInteger countRow = new AtomicInteger(0);

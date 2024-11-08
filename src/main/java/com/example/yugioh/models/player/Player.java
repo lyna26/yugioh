@@ -1,8 +1,6 @@
 package com.example.yugioh.models.player;
 
-import com.example.yugioh.models.deck.Deck;
 import com.example.yugioh.models.deck.DeckSet;
-import com.example.yugioh.models.field.Field;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -23,8 +21,6 @@ public class Player implements Serializable {
     private final List<DeckSet> decks;
     private String name;
     private DeckSet duelDeck;
-    private transient Field field;
-    private transient LpProgressBar lp;
     private DeckSet modifiedDeck ;
     private transient boolean isMonsterNormalSummoned;
     private String sleeve = "C://Users//Lola//IdeaProjects//demo//src//main//resources//com//example//yugioh//images//Yugioh_Card_Back.jpg";

@@ -1,5 +1,6 @@
 package com.example.yugioh.controllers;
 
+import com.example.yugioh.models.card.Card;
 import com.example.yugioh.models.card.CardImpl;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -14,7 +15,7 @@ public class CardResultController{
 
     private CardImpl card ;
 
-    public void setCard(CardImpl card) {
+    public void setCard(Card card) {
         cardImage.setImage(new Image(card.getSmallCardImage()));
         cardName.setText(card.getName());
     }

@@ -1,7 +1,5 @@
 package com.example.yugioh.models.card;
 
-public interface Pendulum extends Monster {
-    default int getScale() {
-        return -1;
-    }
+public interface Pendulum extends MonsterCard, SpellCard{
+    int getPendulumScale();
 }

@@ -7,8 +7,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextInputDialog;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
@@ -16,13 +18,13 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
-
-import static com.example.yugioh.cmn.SceneUtility.HEIGHT;
-import static com.example.yugioh.cmn.SceneUtility.WIDTH;
 
 @Slf4j
 public class DeckMenuController implements Initializable {
+    @FXML
+    private Button createDeck;
     @FXML
     private ListView<DeckSet> deckListView;
 
@@ -30,8 +32,32 @@ public class DeckMenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        createDeck.setOnMouseClicked(event -> createDeck());
         deckMenuModel = new DeckMenuModel(Game.getInstance().getPlayer().getDecks());
         initListView();
+    }
+
+    void createDeck(){
+        String name = askForDeckName();
+
+        // If a valid name is returned, create the deck
+        if (name != null && !name.trim().isEmpty()) {
+            deckMenuModel.createDeck(name);
+        }
+    }
+
+    private String askForDeckName() {
+        // Create a new dialog window
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Create New Deck");
+        dialog.setHeaderText("Enter the name of the new deck");
+        dialog.setContentText("Deck Name:");
+
+        // Show the dialog and wait for user input
+        Optional<String> result = dialog.showAndWait();
+
+        // Return the deck name if the user has entered a name and clicked OK
+        return result.orElse(null);
     }
 
     private void initListView() {
@@ -42,12 +68,12 @@ public class DeckMenuController implements Initializable {
             if (event.getClickCount() == 2) {
                 DeckSet selectedDeckSet = deckListView.getSelectionModel().getSelectedItem();
                 Game.getInstance().getPlayer().setModifiedDeck(selectedDeckSet);
-                openDeckBuilder(selectedDeckSet);
+                openDeckBuilder();
             }
         });
     }
 
-    private void openDeckBuilder(DeckSet deckSet) {
+    private void openDeckBuilder() {
         try {
             changeScene();
         } catch (IOException e) {

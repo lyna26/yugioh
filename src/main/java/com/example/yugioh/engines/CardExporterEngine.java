@@ -1,31 +1,43 @@
 package com.example.yugioh.engines;
 
 import com.fasterxml.jackson.databind.JsonNode;
-
-import java.io.UnsupportedEncodingException;
-import java.sql.SQLException;
+import lombok.extern.slf4j.Slf4j;
 
 /**
- * This class is responsible for exporting card data obtained from an external API to the local database.
- * It uses the ApiEngine and DataBaseEngine classes to retrieve and store data, respectively.
+ * This class is responsible for exporting card data from API to database
  */
+@Slf4j
 public class CardExporterEngine {
+    private final CardApiService cardApiService ;
+    private final CardTransformer cardTransformer ;
+    private final DeckRepository deckRepository ;
 
-    /**
-     * This function exports data obtained from the external API to the local database by first retrieving
-     * the data using the ApiEngine class and then inserting it into the database using the DataBaseEngine class.
-     *
-     * @throws SQLException                 if there is an error with the SQL query or connection to the database
-     * @throws UnsupportedEncodingException if there is an error with the encoding of the data
-     */
-    public static void exportApiData() throws SQLException, UnsupportedEncodingException {
-
-        JsonNode cards = ApiEngine.getCardData().get("data");
-        DeckRepository.insertCards(cards);
+    public CardExporterEngine() {
+        cardApiService = new CardApiService();
+        cardTransformer = new CardTransformer();
+        deckRepository = new DeckRepository();
     }
 
+    /**
+     * Exports data obtained from the external API to the local database
+     */
+    public void exportApiData(){
+        try{
+            String cardsJson = cardApiService.fetchAllCards();
+            JsonNode cards = cardTransformer.transformToCards(cardsJson);
+            deckRepository.insertCards(cards.get("data"));
+            log.info("The exportation is a success. {} cards were added to the database", cards.size());
+        } catch (Exception e) {
+            log.error("An error occurred while exporting data", e);
+        }
+    }
 
-    public static void main(String[] args) throws SQLException, UnsupportedEncodingException {
-        exportApiData();
+    public static void main(String[] args){
+        try {
+            CardExporterEngine cardExporter = new CardExporterEngine();
+            cardExporter.exportApiData();
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
     }
 }

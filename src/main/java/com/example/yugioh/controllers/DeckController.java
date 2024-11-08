@@ -2,6 +2,7 @@ package com.example.yugioh.controllers;
 
 import com.example.yugioh.engines.DeckRepository;
 import com.example.yugioh.enums.DeckType;
+import com.example.yugioh.models.card.Card;
 import com.example.yugioh.models.card.CardImpl;
 import com.example.yugioh.models.deck.Deck;
 import javafx.event.Event;
@@ -70,8 +71,8 @@ public class DeckController implements Initializable {
         boolean success = false;
         if (db.hasString()) {
             if (deck.getCardList().size() < deck.getMaxCard()) {
-                List<CardImpl> res = DeckRepository.selectCardById(db.getString());
-                for (CardImpl card: res) {
+                List<Card> res = DeckRepository.selectCardById(db.getString());
+                for (Card card: res) {
                     addCard(card);
                     deck.addCard(card);
                 }
@@ -82,7 +83,7 @@ public class DeckController implements Initializable {
         event.consume();
     }
 
-    public void addCard(CardImpl card){
+    public void addCard(Card card){
         try {
             deck.addCard(card);
             CardController cardController = new CardController(card);
@@ -100,10 +101,10 @@ public class DeckController implements Initializable {
         }
 
 
-        card.setImage(new Image(card.getSmallCardImage()));
+       /* card.setImage(new Image(card.getSmallCardImage()));
 
         card.setFitWidth(150);
-        card.setFitHeight(150);
+        card.setFitHeight(150);*/
     }
     public void remove(Event event) {
         CardImpl node = (CardImpl) event.getTarget();

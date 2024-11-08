@@ -5,13 +5,17 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 @Getter
 @Setter
 @ToString
-public class TrapCard extends CardImpl {
-    public TrapCard(ResultSet card) throws SQLException {
+public class SpellCardImpl extends CardImpl implements SpellCard{
+    public SpellCardImpl(ResultSet card) {
         super(card);
+    }
+
+    @Override
+    public String getSpellEffect() {
+        return null;
     }
 }
