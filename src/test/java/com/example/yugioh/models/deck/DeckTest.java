@@ -1,6 +1,7 @@
 package com.example.yugioh.models.deck;
 
 import com.example.yugioh.enums.DeckType;
+import com.example.yugioh.models.card.Card;
 import com.example.yugioh.models.card.CardImpl;
 import org.junit.jupiter.api.Test;
 
