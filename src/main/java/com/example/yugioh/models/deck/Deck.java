@@ -18,11 +18,13 @@ import java.util.Optional;
  */
 
 @Slf4j
-public class Deck implements Serializable {
+public class
+
+Deck implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
     @Getter
-    private List<CardImpl> cardList;
+    private List<Card> cardList;
     private DeckType type;
 
     public Deck(DeckType type) {
@@ -40,7 +42,7 @@ public class Deck implements Serializable {
         return isValidSize();
     }
 
-    public void addCard(CardImpl card) {
+    public void addCard(Card card) {
         if (cardList.size() + 1 <= getMaxCard()) {
             cardList.add(card);
         } else {
@@ -48,7 +50,7 @@ public class Deck implements Serializable {
         }
     }
 
-    public Optional<CardImpl> drawCard() {
+    public Optional<Card> drawCard() {
         return cardList.stream().findFirst();
     }
 

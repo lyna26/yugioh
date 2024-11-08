@@ -1,5 +1,6 @@
 package com.example.yugioh.controllers;
 
+import com.example.yugioh.models.card.Card;
 import com.example.yugioh.models.card.CardImpl;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -20,7 +21,7 @@ public class CardInfosController implements Initializable {
     @FXML
     Text cardDesc;
 
-    private final ObjectProperty<CardImpl> cardProperty = new SimpleObjectProperty<>();
+    private final ObjectProperty<Card> cardProperty = new SimpleObjectProperty<>();
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         cardProperty.addListener((observable, oldCard, newCard) -> {
@@ -32,7 +33,7 @@ public class CardInfosController implements Initializable {
         });
     }
 
-    public void setCard(CardImpl card) {
+    public void setCard(Card card) {
         cardProperty.set(card);
     }
 }

@@ -7,6 +7,4 @@ public interface Card {
     String getDescription();
     String getSmallCardImage();
     String getBigCardImage();
-    String getBackImage();
-    String getRace();
 }

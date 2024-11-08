@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<AnchorPane
-        stylesheets="@../../css/DeckMenu.css" xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0"
-        xmlns="http://javafx.com/javafx/19" fx:controller="com.example.yugioh.controllers.DeckMenuController">
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../../css/DeckMenu.css"
+            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.yugioh.controllers.DeckMenuController">
     <VBox layoutX="265.0" layoutY="43.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="1.0"
           AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
+        <Button fx:id="createDeck" mnemonicParsing="false" text="Create deck"/>
 
         <ListView fx:id="deckListView" prefHeight="200.0" prefWidth="200.0"/>
     </VBox>

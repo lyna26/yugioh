@@ -1,6 +1,7 @@
 package com.example.yugioh.models.deck;
 
 import com.example.yugioh.engines.DeckRepository;
+import com.example.yugioh.models.card.Card;
 import com.example.yugioh.models.card.CardImpl;
 import lombok.Getter;
 
@@ -17,7 +18,7 @@ public class DeckBuilderModel {
         this.deckSet = deckSet;
     }
 
-    public List<CardImpl> searchCardsByName(String cardName){
+    public List<Card> searchCardsByName(String cardName){
         return deckRepository.selectCardsByName(cardName);
     }
 }

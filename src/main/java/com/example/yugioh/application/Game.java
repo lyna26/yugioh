@@ -9,12 +9,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.concurrent.atomic.AtomicReference;
 
-
 @Getter
 public class Game implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
-    //private static final String FILE_TO_SAVE = "System.getProperty("user.home") + "/yugioh/save";";
     private static final String FILE_TO_SAVE = "/game.ser";
     private static final AtomicReference<Game> gameInstance = new AtomicReference<>();
     private Player player;
@@ -23,7 +21,6 @@ public class Game implements Serializable {
 
     public static Game getInstance() {
         Game instance = gameInstance.get();
-
         if (instance == null) {
             synchronized (Game.class) {
                 instance = gameInstance.get();
@@ -52,7 +49,6 @@ public class Game implements Serializable {
             save();
         }
     }
-
     public static void save()  {
         try(FileOutputStream fos = new FileOutputStream(FILE_TO_SAVE);
             ObjectOutputStream oos = new ObjectOutputStream(fos)) {

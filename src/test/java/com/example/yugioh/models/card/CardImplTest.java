@@ -1,57 +1,48 @@
 package com.example.yugioh.models.card;
 
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 class CardImplTest {
 
-    @AfterEach
-    void tearDown() {
+    private ResultSet QUERY_RESULT;
+
+    @BeforeEach
+    void setUp(){
+        QUERY_RESULT = Mockito.mock(ResultSet.class);
     }
 
     @Test
-    void parseTypeList() {
+    void init_card_when_getting_result_is_correct() throws SQLException {
+        when(QUERY_RESULT.getInt("id")).thenReturn(1);
+        when(QUERY_RESULT.getString("name")).thenReturn("Blue-Eyes White Dragon");
+        when(QUERY_RESULT.getString("desc")).thenReturn("A powerful dragon with white scales.");
+        when(QUERY_RESULT.getString("image_url_small")).thenReturn("url_to_small_image");
+        when(QUERY_RESULT.getString("image_url")).thenReturn("url_to_large_image");
+
+        final CardImpl card = new CardImpl(QUERY_RESULT) {};
+
+        assertEquals(1, card.getCardId());
+        assertEquals("Blue-Eyes White Dragon", card.getName());
+        assertEquals("A powerful dragon with white scales.", card.getDescription());
+        assertEquals("url_to_small_image", card.getSmallCardImage());
+        assertEquals("url_to_large_image", card.getBigCardImage());
     }
 
     @Test
-    void getCardId() {
-    }
+    public void init_card_when_sql_error_throws_exception() throws SQLException {
 
-    @Test
-    void getName() {
-    }
+            when(QUERY_RESULT.getInt("id")).thenThrow(new SQLException("Database error"));
 
-    @Test
-    void getDescription() {
-    }
-
-    @Test
-    void getCardImage() {
-    }
-
-    @Test
-    void getBackImage() {
-    }
-
-    @Test
-    void getTypes() {
-    }
-
-    @Test
-    void getFace() {
-    }
-
-    @Test
-    void setBackImage() {
-    }
-
-    @Test
-    void setFace() {
-    }
-
-    @Test
-    void testToString() {
-    }
+            assertThrows(CardInitializationException.class, () -> {
+                new CardImpl(QUERY_RESULT) {};
+            });
+        }
 }
