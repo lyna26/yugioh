@@ -1,5 +1,7 @@
 package com.example.yugioh.models.card;
 
+import com.example.yugioh.exceptions.CantGiveNegativeValueException;
+import com.example.yugioh.exceptions.CardInitializationException;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -9,15 +11,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Getter
-@Setter
 @ToString
 @Slf4j
 public abstract class MonsterCardImpl extends CardImpl implements MonsterCard  {
     private int atk;
     private int def;
-    private String attribute;
+    private final String attribute;
 
-    public MonsterCardImpl(ResultSet card) {
+    public MonsterCardImpl(final ResultSet card) {
         super(card);
         try {
             this.atk = card.getInt("atk");
@@ -32,7 +33,7 @@ public abstract class MonsterCardImpl extends CardImpl implements MonsterCard  {
     public void setAtk(int atk){
         if (atk < 0){
             log.error("You can't set negative value for attack");
-            throw new CantGiveNegativeValue("You can't set negative value for attack");
+            throw new CantGiveNegativeValueException("You can't set negative value for attack");
         }
         this.atk = atk;
     }
@@ -40,7 +41,7 @@ public abstract class MonsterCardImpl extends CardImpl implements MonsterCard  {
     public void setDef(int def){
         if (def < 0){
             log.error("You can't set negative value for defense");
-            throw new CantGiveNegativeValue("You can't set negative value for defense");
+            throw new CantGiveNegativeValueException("You can't set negative value for defense");
         }
         this.def = def;
     }

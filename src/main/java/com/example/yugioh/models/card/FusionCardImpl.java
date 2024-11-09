@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 public class FusionCardImpl extends MonsterCardImpl implements Fusion {
 
-    public FusionCardImpl  (ResultSet card) {
+    public FusionCardImpl  (final ResultSet card) {
         super(card);
     }
 }

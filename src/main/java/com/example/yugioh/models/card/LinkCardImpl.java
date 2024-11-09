@@ -1,5 +1,7 @@
 package com.example.yugioh.models.card;
 
+import com.example.yugioh.exceptions.CardCantHandleActionException;
+import com.example.yugioh.exceptions.CardInitializationException;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -8,15 +10,16 @@ import lombok.extern.slf4j.Slf4j;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
+
 @Getter
-@Setter
 @ToString
 @Slf4j
 public class LinkCardImpl extends MonsterCardImpl implements Link {
-    private int linkRating;
-    private String linkedZones;
+    private final int linkRating;
+    private final String linkedZones;
 
-    public LinkCardImpl(ResultSet card) {
+    public LinkCardImpl(final ResultSet card) {
         super(card);
         try {
             this.linkRating = card.getInt("linkval");

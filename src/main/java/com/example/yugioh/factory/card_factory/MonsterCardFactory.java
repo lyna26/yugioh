@@ -1,25 +1,31 @@
 package com.example.yugioh.factory.card_factory;
 
-import com.example.yugioh.enums.CardType;
 import com.example.yugioh.enums.MonsterType;
+import com.example.yugioh.exceptions.MonsterTypeExistsButNotHandled;
+import com.example.yugioh.exceptions.UnknownCardTypeException;
 import com.example.yugioh.models.card.*;
-import com.google.common.base.Function;
-import com.google.common.base.Optional;
+import lombok.extern.slf4j.Slf4j;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.Map;
+import java.util.Optional;
 
-import static com.google.common.base.Enums.getIfPresent;
 
 /**
- * A factory class for creating MonsterCard objects.
+ * A factory class that create monster cards
  */
+@Slf4j
 public class MonsterCardFactory implements CardFactory {
-    private static final Map<MonsterType, Function<ResultSet, MonsterCard>> cardCreators = Map.of(
-            //MonsterType.NORMAL, MonsterCardImpl::new,
-            //MonsterType.EFFECT, MonsterCardImpl::new,
+
+
+    @FunctionalInterface
+    private interface MonsterCardCreator{
+        MonsterCard createCard(ResultSet resultSet);
+    }
+    private static final Map<MonsterType, MonsterCardCreator> cardCreators = Map.of(
+            MonsterType.NORMAL, SimpleMonster::new,
+            MonsterType.EFFECT, SimpleMonster::new,
             MonsterType.FUSION, FusionCardImpl::new,
             MonsterType.SYNCHRO, SynchroCardImpl::new,
             MonsterType.XYZ, XyzCardImpl::new,
@@ -28,49 +34,49 @@ public class MonsterCardFactory implements CardFactory {
     );
 
 
-    @Override
-    public MonsterCard createCard(ResultSet card) {
+    /**
+     * Creates a MonsterCard based on the data provided in the ResultSet.
+     *
+     * @param cardData the ResultSet containing card information
+     * @return a MonsterCard instance corresponding to the MonsterType
+     */
+    public MonsterCard createCard(ResultSet cardData) {
         try {
-            String[] typeString = card.getString("type").split(" ");
 
-            // Parcourir chaque type possible et utiliser cardCreators s'il existe un type correspondant
-            java.util.Optional<MonsterType> cardTypeOpt = Arrays.stream(typeString)
-                    .map(String::toUpperCase)
-                    .map(type -> getIfPresent(MonsterType.class, type))
-                    .filter(Optional::isPresent)
-                    .map(Optional::get)
-                    .findFirst();
+            MonsterType monsterType = parseMonsterType(cardData);
 
-            return cardTypeOpt.map(cardType -> {
-                Function<ResultSet, MonsterCard> creator = cardCreators.get(cardType);
-                if (creator != null) {
-                    try {
-                        return creator.apply(card);
-                    } catch (Exception e) {
-                        throw new RuntimeException("Erreur lors de la création de la carte de type " + cardType, e);
-                    }
-                }
-                throw new RuntimeException("Type de carte non pris en charge : " + cardType);
-            }).orElseThrow(() -> new RuntimeException("Type de carte non trouvé pour : " + typeString));
+            MonsterCardCreator creator = cardCreators.get(monsterType);
 
+            if (creator == null) {
+                throw new MonsterTypeExistsButNotHandled("Unsupported monster type: " + monsterType);
+            }
 
+            return creator.createCard(cardData);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            log.error("SQL error while accessing card data: {}", e.getMessage(), e);
+            throw new RuntimeException("Database error during monster card creation", e);
+        } catch (UnknownCardTypeException | MonsterTypeExistsButNotHandled e) {
+            log.error("Error creating monster card: {}", e.getMessage(), e);
+            throw e;
+        } catch (Exception e) {
+            log.error("Unexpected error during monster card creation: {}", e.getMessage(), e);
+            throw new RuntimeException("Unexpected error during monster card creation", e);
         }
 
     }
 
-
-    public static MonsterCard createCard(ResultSet card, String type) {
-        try {
-
-            // Parcourir chaque type possible et utiliser cardCreators s'il existe un type correspondant
-
-            MonsterType cardType = getIfPresent(MonsterType.class, type.toUpperCase()).get();
-
-            return cardCreators.get(cardType).apply(card);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    /**
+     * Parses and retrieves the MonsterType from the ResultSet.
+     *
+     * @param cardData the ResultSet containing card information
+     * @return the MonsterType, or throws an IllegalArgumentException if unrecognized
+     * @throws SQLException if accessing the ResultSet fails
+     */
+    private MonsterType parseMonsterType(ResultSet cardData) throws SQLException {
+        String frameType = cardData.getString("frame_type");
+        return Optional.ofNullable(frameType)
+                .map(String::toUpperCase)
+                .map(MonsterType::valueOf)
+                .orElseThrow(() -> new UnknownCardTypeException("Unknown frame type: " + frameType));
     }
 }
