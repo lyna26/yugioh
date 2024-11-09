@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 
 public class SynchroCardImpl extends MonsterCardImpl implements Synchro {
 
-    public SynchroCardImpl(ResultSet card) {
+    public SynchroCardImpl(final ResultSet card) {
         super(card);
     }
 }

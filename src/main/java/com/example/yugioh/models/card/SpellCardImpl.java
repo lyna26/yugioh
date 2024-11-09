@@ -10,12 +10,12 @@ import java.sql.ResultSet;
 @Setter
 @ToString
 public class SpellCardImpl extends CardImpl implements SpellCard{
-    public SpellCardImpl(ResultSet card) {
+    public SpellCardImpl(final ResultSet card) {
         super(card);
     }
 
     @Override
     public String getSpellEffect() {
-        return null;
+        throw new UnsupportedOperationException("This method is not yet implemented.");
     }
 }

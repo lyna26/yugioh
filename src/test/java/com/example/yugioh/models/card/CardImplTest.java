@@ -1,5 +1,6 @@
 package com.example.yugioh.models.card;
 
+import com.example.yugioh.exceptions.CardInitializationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -41,8 +42,6 @@ class CardImplTest {
 
             when(QUERY_RESULT.getInt("id")).thenThrow(new SQLException("Database error"));
 
-            assertThrows(CardInitializationException.class, () -> {
-                new CardImpl(QUERY_RESULT) {};
-            });
+            assertThrows(CardInitializationException.class, () -> new CardImpl(QUERY_RESULT) {});
         }
 }

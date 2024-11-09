@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 
 public class RitualCardImpl extends MonsterCardImpl implements Ritual{
 
-    public RitualCardImpl(ResultSet card) {
+    public RitualCardImpl(final ResultSet card) {
         super(card);
     }
 }

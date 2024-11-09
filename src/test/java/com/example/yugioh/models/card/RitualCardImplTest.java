@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class MonsterCardImplTest {
+class RitualCardImplTest {
     private ResultSet QUERY_RESULT;
 
     @BeforeEach
@@ -32,7 +32,7 @@ class MonsterCardImplTest {
         when(QUERY_RESULT.getInt("def")).thenReturn(1500);
         when(QUERY_RESULT.getString("attribute")).thenReturn("FIRE");
 
-        MonsterCardImpl monsterCard = new MonsterCardImpl(QUERY_RESULT) {};
+        RitualCardImpl monsterCard = new RitualCardImpl(QUERY_RESULT) {};
 
         assertEquals(1, monsterCard.getCardId());
         assertEquals("Blue-Eyes White Dragon", monsterCard.getName());
@@ -49,19 +49,19 @@ class MonsterCardImplTest {
 
         when(QUERY_RESULT.getInt("id")).thenThrow(new SQLException("Database error"));
 
-        assertThrows(CardInitializationException.class, () -> new MonsterCardImpl(QUERY_RESULT) {});
+        assertThrows(CardInitializationException.class, () -> new RitualCardImpl(QUERY_RESULT) {});
     }
 
     @Test
     void when_monster_card_initialization_then_failure_2() throws SQLException {
         when(QUERY_RESULT.getInt("atk")).thenThrow(SQLException.class);
-        assertThrows(CardInitializationException.class, () -> new MonsterCardImpl(QUERY_RESULT) {});
+        assertThrows(CardInitializationException.class, () -> new RitualCardImpl(QUERY_RESULT) {});
     }
 
     @Test
     void when_set_atk_with_positive_value_then_ok() {
         int validAtk = 2000;
-        MonsterCardImpl monsterCard = new MonsterCardImpl(QUERY_RESULT){};
+        RitualCardImpl monsterCard = new RitualCardImpl(QUERY_RESULT){};
 
         monsterCard.setAtk(validAtk);
 
@@ -71,7 +71,7 @@ class MonsterCardImplTest {
     @Test
     void when_set_atk_with_negative_value_then_throws_exception() {
         int invalidAtk = -100;
-        MonsterCardImpl monsterCard = new MonsterCardImpl(QUERY_RESULT){};
+        RitualCardImpl monsterCard = new RitualCardImpl(QUERY_RESULT){};
 
         assertThrows(CantGiveNegativeValueException.class, () -> monsterCard.setAtk(invalidAtk));
     }
@@ -79,7 +79,7 @@ class MonsterCardImplTest {
     @Test
     void when_set_def_with_positive_value_then_ok() {
         int validDef = 1500;
-        MonsterCardImpl monsterCard = new MonsterCardImpl(QUERY_RESULT){};
+        RitualCardImpl monsterCard = new RitualCardImpl(QUERY_RESULT){};
 
         monsterCard.setDef(validDef);
 
@@ -89,7 +89,7 @@ class MonsterCardImplTest {
     @Test
     void when_set_def_with_negative_value_then_throws_exception() {
         int invalidDef = -100;
-        MonsterCardImpl monsterCard = new MonsterCardImpl(QUERY_RESULT){};
+        RitualCardImpl monsterCard = new RitualCardImpl(QUERY_RESULT){};
 
         assertThrows(CantGiveNegativeValueException.class, () -> monsterCard.setDef(invalidDef));
     }

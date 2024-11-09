@@ -1,4 +1,4 @@
-package com.example.yugioh.models.card;
+package com.example.yugioh.exceptions;
 
 import java.sql.SQLException;
 

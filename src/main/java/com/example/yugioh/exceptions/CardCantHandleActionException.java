@@ -1,4 +1,4 @@
-package com.example.yugioh.models.card;
+package com.example.yugioh.exceptions;
 
 public class CardCantHandleActionException extends RuntimeException {
 }
