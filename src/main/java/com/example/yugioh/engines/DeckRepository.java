@@ -1,24 +1,23 @@
 package com.example.yugioh.engines;
 
+import com.example.yugioh.enums.Limit;
 import com.example.yugioh.enums.LinkMarker;
 import com.example.yugioh.factory.card_factory.CardFactoryImpl;
 import com.example.yugioh.models.card.Card;
-import com.example.yugioh.models.card.CardImpl;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
+import org.junit.jupiter.api.function.ThrowingConsumer;
 
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
-import org.junit.jupiter.api.function.ThrowingConsumer;
 
 /**
  * This class is an engine that will communicate with database.
@@ -95,21 +94,20 @@ public class DeckRepository {
      * @param cards data formatted as Json
      */
     public void insertCards(JsonNode cards) throws SQLException {
-        String reqParam = "insert into card VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String reqParam = "insert into card VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try (
                 Connection connection = dataSource.getConnection();
                 PreparedStatement pstm = connection.prepareStatement(reqParam)
         ) {
             cards.forEach(card -> {
                 JsonNode cardImages = card.path("card_images");
-                Charset def = Charset.defaultCharset();
-                byte[] bytes = card.path("desc").asText().getBytes(StandardCharsets.UTF_8);
                 cardImages.forEach(cardImage -> {
                     try {
-                        setPreparedStatementBatch(cardImage, pstm, card, bytes, def);
+                        setPreparedStatementBatch(cardImage, pstm, card);
                         pstm.addBatch();
                     } catch (SQLException exceptionSql) {
-                        log.error("error happened");
+                        log.error("error happened" + exceptionSql.getMessage());
+                        throw new RuntimeException(exceptionSql);
                     }
                 });
             });
@@ -119,14 +117,11 @@ public class DeckRepository {
         }
     }
 
-    private static void setPreparedStatementBatch(JsonNode cardImage, PreparedStatement pstm, JsonNode card, byte[] bytes, Charset def) throws SQLException {
+    private static void setPreparedStatementBatch(JsonNode cardImage, PreparedStatement pstm, JsonNode card) throws SQLException {
         pstm.setInt(1, cardImage.path("id").asInt());
         pstm.setString(2, card.path("name").asText());
         pstm.setString(3, card.path("type").asText());
-
-        String desc = new String(bytes, def);
-        pstm.setNString(4, desc);
-
+        pstm.setNString(4, card.path("desc").asText());
         pstm.setInt(5, card.path("atk").asInt());
         pstm.setInt(6, card.path("def").asInt());
         pstm.setInt(7, card.path("level").asInt());
@@ -134,9 +129,21 @@ public class DeckRepository {
         pstm.setString(9, card.path("attribute").asText());
         pstm.setString(10, cardImage.path("image_url").asText());
         pstm.setInt(11, card.path("linkval").asInt());
+        pstm.setString(12, linkMarkersAsString(card.path("linkmarkers")));
+        pstm.setInt(13, card.path("scale").asInt());
+        pstm.setString(14, cardImage.path("image_url_small").asText());
+        pstm.setString(15, card.path("frameType").asText());
+        pstm.setString(16, getBanList(card.path("banlist_info")));
+    }
 
+
+    private static String linkMarkersAsString(JsonNode markers) {
+
+        if (markers.isEmpty()){
+            return "";
+        }
         StringBuilder linkMarkersBuilder = new StringBuilder();
-        JsonNode markers = card.path("linkmarkers");
+
         for (JsonNode marker : markers) {
             String arrow = LinkMarker.getArrowForMarker(marker.asText());
             linkMarkersBuilder.append(arrow).append(", ");
@@ -145,12 +152,19 @@ public class DeckRepository {
         if (!linkMarkers.isEmpty()) {
             linkMarkers = linkMarkers.substring(0, linkMarkers.length() - 2);
         }
+        return linkMarkers;
+    }
 
-        pstm.setString(12, linkMarkers);
+    private static String getBanList(JsonNode banList){
+        if (banList.isEmpty()){
+            return Limit.NO_LIMITED.getLimitName();
+        }
+        JsonNode banTcgNode = banList.path("ban_tcg");
 
-        pstm.setString(12, linkMarkers);
-        pstm.setInt(13, card.path("scale").asInt());
-        pstm.setString(14, cardImage.path("image_url_small").asText());
-        pstm.setString(15, card.path("frameType").asText());
+        if (banTcgNode.isEmpty()) {
+            return Limit.NO_LIMITED.getLimitName();
+        }
+
+        return banTcgNode.asText().replace('-', '_').toUpperCase();
     }
 }

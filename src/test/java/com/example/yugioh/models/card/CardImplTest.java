@@ -1,5 +1,6 @@
 package com.example.yugioh.models.card;
 
+import com.example.yugioh.enums.Limit;
 import com.example.yugioh.exceptions.CardInitializationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,7 @@ class CardImplTest {
     private ResultSet QUERY_RESULT;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         QUERY_RESULT = Mockito.mock(ResultSet.class);
     }
 
@@ -27,21 +28,38 @@ class CardImplTest {
         when(QUERY_RESULT.getString("desc")).thenReturn("A powerful dragon with white scales.");
         when(QUERY_RESULT.getString("image_url_small")).thenReturn("url_to_small_image");
         when(QUERY_RESULT.getString("image_url")).thenReturn("url_to_large_image");
+        when(QUERY_RESULT.getString("ban")).thenReturn("FORBIDDEN");
 
-        final CardImpl card = new CardImpl(QUERY_RESULT) {};
+        final CardImpl card = new CardImpl(QUERY_RESULT) {
+        };
 
         assertEquals(1, card.getCardId());
         assertEquals("Blue-Eyes White Dragon", card.getName());
         assertEquals("A powerful dragon with white scales.", card.getDescription());
         assertEquals("url_to_small_image", card.getSmallCardImage());
         assertEquals("url_to_large_image", card.getBigCardImage());
+        assertEquals(Limit.FORBIDDEN.getNbCopies(), card.getLimit());
     }
+
+    @Test
+    void init_card_when_getting_result_is_wrong() throws SQLException {
+        when(QUERY_RESULT.getInt("id")).thenReturn(1);
+        when(QUERY_RESULT.getString("name")).thenReturn("Blue-Eyes White Dragon");
+        when(QUERY_RESULT.getString("desc")).thenReturn("A powerful dragon with white scales.");
+        when(QUERY_RESULT.getString("image_url_small")).thenReturn("url_to_small_image");
+        when(QUERY_RESULT.getString("image_url")).thenReturn("url_to_large_image");
+        when(QUERY_RESULT.getString("ban")).thenReturn("FOR");
+
+        assertThrows(CardInitializationException.class, () -> new CardImpl(QUERY_RESULT) {});
+    }
+
 
     @Test
     public void init_card_when_sql_error_throws_exception() throws SQLException {
 
-            when(QUERY_RESULT.getInt("id")).thenThrow(new SQLException("Database error"));
+        when(QUERY_RESULT.getInt("id")).thenThrow(new SQLException("Database error"));
 
-            assertThrows(CardInitializationException.class, () -> new CardImpl(QUERY_RESULT) {});
-        }
+        assertThrows(CardInitializationException.class, () -> new CardImpl(QUERY_RESULT) {
+        });
+    }
 }

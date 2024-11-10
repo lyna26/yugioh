@@ -7,4 +7,5 @@ public interface Card {
     String getDescription();
     String getSmallCardImage();
     String getBigCardImage();
+    int getLimit();
 }

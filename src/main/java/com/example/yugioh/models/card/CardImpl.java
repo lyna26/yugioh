@@ -1,5 +1,6 @@
 package com.example.yugioh.models.card;
 
+import com.example.yugioh.enums.Limit;
 import com.example.yugioh.exceptions.CardInitializationException;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
@@ -8,6 +9,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 
 /**
  * This abstract class represents a Yu-Gi-Oh card.
@@ -23,6 +25,8 @@ public abstract class CardImpl implements Serializable, Card{
     final String description;
     final String bigCardImage;
     final String smallCardImage;
+    final String race;
+    final int limit;
 
     public CardImpl(final ResultSet card) {
         try {
@@ -31,7 +35,9 @@ public abstract class CardImpl implements Serializable, Card{
             this.description = card.getString("desc");
             this.bigCardImage = card.getString("image_url");
             this.smallCardImage = card.getString("image_url_small");
-        }catch(SQLException exception){
+            this.race = card.getString("race");
+            this.limit = Limit.valueOf(card.getString("ban")).getNbCopies();
+        }catch(SQLException  | IllegalArgumentException exception){
             log.error("Failed to initialize card from ResultSet", exception);
             throw new CardInitializationException("Failed to initialize card from ResultSet" + exception.getMessage(), exception);
         }

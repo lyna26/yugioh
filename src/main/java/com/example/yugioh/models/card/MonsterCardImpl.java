@@ -3,7 +3,6 @@ package com.example.yugioh.models.card;
 import com.example.yugioh.exceptions.CantGiveNegativeValueException;
 import com.example.yugioh.exceptions.CardInitializationException;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 

@@ -26,7 +26,7 @@ public class CardExporterEngine {
             String cardsJson = cardApiService.fetchAllCards();
             JsonNode cards = cardTransformer.transformToCards(cardsJson);
             deckRepository.insertCards(cards.get("data"));
-            log.info("The exportation is a success. {} cards were added to the database", cards.size());
+            log.info("The exportation is a success.");
         } catch (Exception e) {
             log.error("An error occurred while exporting data", e);
         }

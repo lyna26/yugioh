@@ -1,15 +1,13 @@
 package com.example.yugioh.controllers;
 
 import com.example.yugioh.engines.DeckRepository;
-import com.example.yugioh.enums.DeckType;
 import com.example.yugioh.models.card.Card;
 import com.example.yugioh.models.card.CardImpl;
-import com.example.yugioh.models.deck.Deck;
+import com.example.yugioh.models.deck.DeckImpl;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
@@ -37,7 +35,7 @@ public class DeckController implements Initializable {
     @FXML
     private Label deckType;
 
-    private Deck deck;
+    private DeckImpl deck;
 
 
     public DeckController() {}
