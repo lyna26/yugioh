@@ -1,7 +1,7 @@
 package com.example.yugioh.enums;
 
 public enum LinkMarker {
-    BOTTOM("\u2193"), // Flèche vers le bas Unicode
+    BOTTOM("\u2193"),
     BOTTOM_LEFT("\u2199"),
     BOTTOM_RIGHT("\u2198"),
     TOP("\u2191"),

@@ -15,5 +15,4 @@ public enum DeckType {
         this.minCard = minCard;
         this.maxCard = maxCard;
     }
-
 }

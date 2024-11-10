@@ -1,8 +1,6 @@
 package com.example.yugioh.models.card;
 
-import java.util.List;
-
-public interface Link extends MonsterCard {
-    public int getLinkRating();
-    public String getLinkedZones();
+public interface Link extends ExtraDeckMonster {
+    int getLinkRating();
+    String getLinkedZones();
 }

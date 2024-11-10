@@ -3,7 +3,6 @@ package com.example.yugioh.models.card;
 import com.example.yugioh.exceptions.CardCantHandleActionException;
 import com.example.yugioh.exceptions.CardInitializationException;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,6 +36,6 @@ public class LinkCardImpl extends MonsterCardImpl implements Link {
 
     @Override
     public void setDef(int def){
-        throw new CardCantHandleActionException();
+        throw new CardCantHandleActionException("this card" + this + "it is defense cant be set");
     }
 }

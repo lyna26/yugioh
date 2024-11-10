@@ -1,7 +1,7 @@
 package com.example.yugioh.controllers;
 
 import com.example.yugioh.application.Game;
-import com.example.yugioh.models.deck.Deck;
+import com.example.yugioh.models.deck.DeckImpl;
 import com.example.yugioh.models.deck.DeckSet;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -55,7 +55,7 @@ public class DeckSetController implements Initializable {
         });
     }
 
-    private void loadDeckFXML(AnchorPane pane, Deck deck, DeckController controller) {
+    private void loadDeckFXML(AnchorPane pane, DeckImpl deck, DeckController controller) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/yugioh/fxml/deck/Deck.fxml"));
             pane.getChildren().setAll((AnchorPane) loader.load());
