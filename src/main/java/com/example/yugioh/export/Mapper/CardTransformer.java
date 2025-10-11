@@ -1,10 +1,12 @@
-package com.example.yugioh.engines;
+package com.example.yugioh.export.Mapper;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 @Slf4j
+@Component
 public class CardTransformer {
     private final ObjectMapper objectMapper;
 

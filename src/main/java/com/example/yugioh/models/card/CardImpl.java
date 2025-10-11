@@ -2,19 +2,16 @@ package com.example.yugioh.models.card;
 
 import com.example.yugioh.enums.Limit;
 import com.example.yugioh.exceptions.CardInitializationException;
-import lombok.*;
+import lombok.Getter;
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Arrays;
 
-/**
- * This abstract class represents a Yu-Gi-Oh card.
- * It contains common attributes and methods that are shared by all types of cards.
- */
+
 @Getter
 @ToString
 @Slf4j
@@ -36,7 +33,7 @@ public abstract class CardImpl implements Serializable, Card{
             this.bigCardImage = card.getString("image_url");
             this.smallCardImage = card.getString("image_url_small");
             this.race = card.getString("race");
-            this.limit = Limit.valueOf(card.getString("ban")).getNbCopies();
+            this.limit = Limit.valueOf(card.getString("banlist_info")).getNbCopies();
         }catch(SQLException  | IllegalArgumentException exception){
             log.error("Failed to initialize card from ResultSet", exception);
             throw new CardInitializationException("Failed to initialize card from ResultSet" + exception.getMessage(), exception);
