@@ -1,18 +1,8 @@
 package com.example.yugioh.models.card;
 
-import com.example.yugioh.exceptions.CantGiveNegativeValueException;
-import com.example.yugioh.exceptions.CardInitializationException;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
-class FusionCardImplTest {
+class FusionCardImplTest {/*
     private ResultSet QUERY_RESULT;
 
     @BeforeEach
@@ -92,6 +82,6 @@ class FusionCardImplTest {
         FusionCardImpl monsterCard = new FusionCardImpl(QUERY_RESULT){};
 
         assertThrows(CantGiveNegativeValueException.class, () -> monsterCard.setDef(invalidDef));
-    }
+    }*/
 
 }

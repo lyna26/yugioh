@@ -6,8 +6,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="425.0" prefWidth="575.0" stylesheets="@../../css/MainMenu.css"
-            xmlns="http://javafx.com/javafx/19" fx:controller="com.example.yugioh.controllers.MainMenuController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="425.0" prefWidth="575.0" stylesheets="@../../static/MainMenu.css"
+            xmlns="http://javafx.com/javafx/19" fx:controller="com.example.yugioh.game.controllers.MainMenuController">
     <effect>
         <DropShadow>
             <color>

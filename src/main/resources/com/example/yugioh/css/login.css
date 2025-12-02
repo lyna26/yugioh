@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    background: radial-gradient(circle at top left, #000010, #020024, #090979, #000);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Orbitron', sans-serif;
+    color: white;
+}
+
+.login-container {
+    background-color: rgba(10, 10, 20, 0.9);
+    border-radius: 8px;
+    padding: 40px 50px;
+    width: 380px;
+    text-align: center;
+    box-shadow: 0 0 25px rgba(100, 0, 255, 0.5);
+}
+
+.logo {
+    width: 220px;
+    margin-bottom: 25px;
+}
+
+h2 {
+    margin-bottom: 30px;
+    color: #ffffff;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px #9900ff;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+input[type="email"], input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    background: #0b0b1a;
+    border: 2px solid #20204a;
+    color: white;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+input::placeholder {
+    color: #aaa;
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    margin-bottom: 25px;
+}
+
+.options input {
+    margin-right: 5px;
+}
+
+a.forgot {
+    color: #9f4aff;
+    text-decoration: none;
+}
+
+a.forgot:hover {
+    text-decoration: underline;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.3s;
+    text-transform: uppercase;
+}
+
+.btn-register {
+    background-color: #101530;
+    color: white;
+}
+
+.btn-register:hover {
+    background-color: #1c1f3a;
+}
+
+.btn-login {
+    background-color: #7a1cf0;
+    color: white;
+}
+
+.btn-login:hover {
+    background-color: #9b32ff;
+    box-shadow: 0 0 10px #7a1cf0;
+}

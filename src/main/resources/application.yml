@@ -1,6 +1,9 @@
 yugioh:
   api:
-    url: "https://db.ygoprodeck.com/api/v7/cardinfo.php?"
+    url: "https://db.ygoprodeck.com/api/v7/cardinfo.php?misc=yes"
+  jwt:
+    secret: "bWFfc2VjcmV0X3Rlc3RfMTIzNDU2Nzg5MDEyMw=="  # équivalent Base64
+    expiration: 3600000
 spring:
   batch:
     jdbc:
@@ -8,17 +11,19 @@ spring:
   datasource:
     url: jdbc:sqlserver://MSI;databaseName=yugioh;encrypt=false;sendStringParametersAsUnicode=true
     username: Lola
-    password: test1234
+    password: test12345
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     continue-on-error: true
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties:
       hibernate:
         dialect: org.hibernate.dialect.SQLServerDialect
         jdbc:
-          batch_size: 500
+          batch_size: 1000
         order_inserts: false
         order_updates: false

@@ -1,0 +1,48 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+.main-container {
+    width: 575px;
+    height: 425px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(175, 12, 12, 0.7);
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+}
+
+button {
+    width: 172px;
+    height: 84px;
+    font-size: 40px;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    transition: transform 0.2s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+.deck-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.exit-btn {
+    background-color: #f44336;
+    color: white;
+}

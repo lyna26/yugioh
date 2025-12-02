@@ -1,6 +1,7 @@
 package com.example.yugioh.application;
 
-import com.example.yugioh.models.player.Player;
+import com.example.yugioh.game.application.Game;
+import com.example.yugioh.auth.entity.Player;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,7 +14,7 @@ class GameTest {
     @BeforeEach
     void setUp() {
         game = Game.getInstance();
-        Player player = new Player("Don");
+        Player player = new Player("Don", "hgh", "bghj");
         game.setPlayer(player);
     }
 

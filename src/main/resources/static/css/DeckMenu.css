@@ -1,0 +1,102 @@
+body {
+      font-family: Arial, sans-serif;
+      background-color: #1a1a1a;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 0
+}
+
+.register-container {
+    background-color: #2b2b2b;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+
+.logo {
+    width: 220px;
+    margin-bottom: 25px;
+}
+
+h2 {
+    margin-bottom: 30px;
+    color: #ffffff;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px #9900ff;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+input[type="email"], input[type="password"], input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    background: #0b0b1a;
+    border: 2px solid #20204a;
+    color: white;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+
+.register-container h1 {
+    margin-bottom: 30px;
+    color: #f2b600;
+}
+
+.register-container input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.register-container button {
+    width: 100%;
+    padding: 12px;
+    background-color: #7a1cf0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.register-container button:hover {
+     background-color: #9b32ff;
+        box-shadow: 0 0 10px #7a1cf0;
+}
+
+.register-container label {
+    display: block;
+    text-align: left;
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: #ccc;
+}
+
+.register-container .login-link {
+    margin-top: 20px;
+    font-size: 0.9em;
+}
+
+form {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+}

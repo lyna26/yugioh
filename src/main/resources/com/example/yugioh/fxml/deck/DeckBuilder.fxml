@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="800.0" stylesheets="@../../css/DeckBuilder.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.yugioh.controllers.DeckBuilderController">
+<AnchorPane prefHeight="800.0" prefWidth="800.0" stylesheets="@../../css/DeckBuilder.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.yugioh.game.controllers.DeckBuilderController">
     <BorderPane layoutX="2.0" layoutY="1.0" prefHeight="800.0" prefWidth="800.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
         <top>
             <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="800.0">
@@ -48,7 +48,7 @@
             </VBox>
         </right>
         <center>
-            <fx:include fx:id="deckSet" source="DeckSet.fxml" />
+            <fx:include fx:id="deckCollection" source="DeckSet.fxml" />
         </center>
       <padding>
          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
