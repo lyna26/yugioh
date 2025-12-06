@@ -27,6 +27,8 @@ public abstract class CardImplDTO implements CardDTO {
 
     private int limit;
 
+    private int level;
+
     public CardImplDTO(final Card card) {
         this.name = card.getName();
         this.imageUrl = card.getImageUrl();

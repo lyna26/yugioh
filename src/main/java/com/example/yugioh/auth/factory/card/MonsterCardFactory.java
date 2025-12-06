@@ -33,6 +33,7 @@ public class MonsterCardFactory implements CardFactory {
         cardCreators.put(SYNCHRO, SynchroCardImpl::new);
         cardCreators.put(RITUAL, RitualCardImpl::new);
         cardCreators.put(PENDULUM, PendulumImpl::new);
+        cardCreators.put(EFFECT, NormalMonster::new);
     }
 
 
@@ -48,16 +49,20 @@ public class MonsterCardFactory implements CardFactory {
             throw new IllegalArgumentException("Card data cannot be null");
         }
 
-        MonsterType monsterType = parseMonsterType(cardData);
+        try{
+            MonsterType monsterType = parseMonsterType(cardData);
 
-        MonsterCardCreator creator = cardCreators.get(monsterType);
+            MonsterCardCreator creator = cardCreators.get(monsterType);
 
-        if (creator == null) {
-            throw new MonsterTypeExistsButNotHandled("Unsupported monster type: " + monsterType);
+            if (creator == null) {
+                throw new MonsterTypeExistsButNotHandled("Unsupported monster type: " + monsterType);
+            }
+            return creator.createCard(cardData);
         }
-
-        return creator.createCard(cardData);
-
+        catch(Exception exception) {
+            log.error(exception.getMessage());
+            return null;
+        }
     }
 
 

@@ -13,11 +13,13 @@ public abstract class MonsterCardImpl extends CardImplDTO implements MonsterCard
     private final int atk;
     private final int def;
     private final String attribute;
+    private final int level;
 
     public MonsterCardImpl(final Card card) {
         super(card);
         this.atk = card.getAtk();
         this.def = card.getDef();
         this.attribute = card.getAttribute();
+        this.level = card.getLevel();
     }
 }

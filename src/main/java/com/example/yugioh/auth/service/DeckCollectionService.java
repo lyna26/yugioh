@@ -41,4 +41,12 @@ public class DeckCollectionService {
         deckCollection.setName(name);
         deckCollectionRepository.save(deckCollection);
     }
+
+    public DeckCollectionDTO getDeckCollectionById(int id, Player player) {
+        DeckCollectionDTO deck = deckCollectionRepository.findById(id)
+                .filter(d -> d.getPlayer().equals(player))
+                .map(DeckCollectionDTO::new)
+                .orElseThrow(() -> new RuntimeException("Deck non trouvé ou accès refusé"));
+        return deck;
+    }
 }

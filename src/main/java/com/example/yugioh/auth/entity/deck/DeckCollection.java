@@ -32,7 +32,7 @@ public class DeckCollection {
     @JoinColumn(name = "player_id", nullable = false)
     private Player player;
 
-    @OneToMany(mappedBy = "deckCollection", cascade = ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "deckCollection", cascade = ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Deck> decks = new ArrayList<>();
 
     public DeckCollection(String name, Player player) {

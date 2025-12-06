@@ -28,6 +28,18 @@ public class DeckCollectionController {
         return  deckService.getDeckCollections(player);
     }
 
+    @GetMapping("/deck")
+    public DeckCollectionDTO getDeckCollectionById(
+            @RequestParam("id") int cardSearchRequest,
+            @CookieValue("jwt") String jwt
+
+    ) {
+        String email = loginService.getEmailFromToken(jwt);
+        Player player = playerService.loadUserByUsername(email).getPlayer();
+        return deckService.getDeckCollectionById(cardSearchRequest, player);
+    }
+
+
    @PostMapping("/add")
     public void createDeckCollection(@RequestBody final DeckCollectionCreationRequest deckCreationRequest, @CookieValue("jwt") String jwt) {
         String email = loginService.getEmailFromToken(jwt);

@@ -5,7 +5,9 @@ import com.example.yugioh.auth.entity.deck.DeckCollection;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface DeckCollectionRepository extends JpaRepository<DeckCollection, Integer> {
     List<DeckCollection> findByPlayer(Player player);
+    Optional<DeckCollection> findById(Integer id);
 }
