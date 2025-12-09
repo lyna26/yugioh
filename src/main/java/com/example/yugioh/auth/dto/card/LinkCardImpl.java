@@ -1,7 +1,6 @@
 package com.example.yugioh.auth.dto.card;
 
 import com.example.yugioh.auth.entity.Card;
-import com.example.yugioh.game.exceptions.CardCantHandleActionException;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +21,6 @@ public class LinkCardImpl extends MonsterCardImpl implements Link {
 
     @Override
     public int getDef(){
-        throw new CardCantHandleActionException("this card doesn't have defense");
+        return -1;
     }
 }

@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class Cardservice {
+public class CardService {
     CardRepository cardRepository;
 
     public List<CardDTO> findByName(String name){

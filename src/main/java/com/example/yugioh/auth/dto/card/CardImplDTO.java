@@ -15,6 +15,8 @@ import lombok.extern.slf4j.Slf4j;
 @NoArgsConstructor
 @AllArgsConstructor
 public abstract class CardImplDTO implements CardDTO {
+    private int id;
+
     private String name;
 
     private String description;
@@ -30,6 +32,7 @@ public abstract class CardImplDTO implements CardDTO {
     private int level;
 
     public CardImplDTO(final Card card) {
+        this.id = card.getId();
         this.name = card.getName();
         this.imageUrl = card.getImageUrl();
         this.description = card.getDescription();

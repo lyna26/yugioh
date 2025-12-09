@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * A class representing a deck in the Yu-Gi-Oh trading card game.
@@ -20,13 +21,15 @@ import java.util.List;
 @Slf4j
 public abstract class DeckDTO {
 
+    int id;
     List<CardDTO> cardList = new ArrayList<>();
     DeckType type;
 
     public DeckDTO(final Deck deck) {
+        id = deck.getId();
         type = DeckType.valueOf(deck.getType());
         cardList = deck.getCardList().stream()
-                            .map(CardFactoryImpl::createCard).toList();
+                            .map(CardFactoryImpl::createCard).collect(Collectors.toCollection(ArrayList::new));
 
     }
 
@@ -46,7 +49,6 @@ public abstract class DeckDTO {
 
     public void addCard(CardDTO card) {
         int newSize = cardList.size() + 1;
-
         if (isValidType(card) && newSize <= getMaxCard()) {
             cardList.add(card);
         } else {

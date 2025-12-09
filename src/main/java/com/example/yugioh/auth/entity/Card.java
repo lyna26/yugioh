@@ -14,7 +14,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Card {
-    // Commun
     @Id
     int id;
     String name;
